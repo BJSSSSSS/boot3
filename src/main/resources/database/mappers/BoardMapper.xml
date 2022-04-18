@@ -5,12 +5,48 @@
     
     <mapper namespace="com.byeon.boot3.board.BoardMapper">
     
+    	<!-- boardFiles -->
+   		<insert id="setFileAdd" parameterType="BoardFilesVO">
+    		INSERT INTO BOARDFILES(FILENUM, NUM, FILENAME, ORINAME)
+    		VALUES(NULL, #{num}, #{fileName}, #{oriName})
+    	</insert>
+    
+    	<delete id="setFileDelete" parameterType="BoardFilesVO">
+    		DELETE FROM BOARDFILES WHERE FILENUM=#{fileNum}
+    	</delete>
+    	
+    	<select id="getFileDetail" parameterType="BoardFilesVO" resultType="BoardFilesVO">
+    		SELECT * FROM BOARDFILES WHERE FILENUM=#{fileNum}
+    	</select>
+    
+    	<select id="getFileList" resultType="BoardFilesVO">
+    		SELECT * FROM BOARDFILES ORDER BY FILENUM DESC
+    	</select>
+    
+
+    	<!-- board -->
     	<select id="getDetail" parameterType="BoardVO" resultType="BoardVO">
     		SELECT * FROM BOARD WHERE NUM=#{num}
     	</select>
     
-    	<select id="getList" resultType="BoardVO">
-    		SELECT * FROM BOARD ORDER BY NUM DESC
+    	<select id="getList" parameterType="Pager" resultType="BoardVO">
+    		SELECT * FROM BOARD 
+    		WHERE NUM>0 
+    		AND 
+    		<choose>
+		    	<when test="kind=='col1'">
+		    		TITLE
+		    	</when>
+		    	<when test="kind=='col2'">
+		    		WRITER
+		    	</when>
+		    	<otherwise>
+		    		CONTENTS
+		    	</otherwise>
+			</choose>
+    		LIKE CONCAT('%',#{search},'%')
+    		ORDER BY NUM DESC 
+    		LIMIT #{startRow}, #{perPage}
     	</select>
     
     	<insert id="setAdd" parameterType="BoardVO">

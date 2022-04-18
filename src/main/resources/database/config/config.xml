@@ -7,6 +7,8 @@
   <configuration>
   	<typeAliases>
   		<typeAlias type="com.byeon.boot3.board.BoardVO" alias="BoardVO"/>
+  		<typeAlias type="com.byeon.boot3.board.BoardFilesVO" alias="BoardFilesVO"/>
+  		<typeAlias type="com.byeon.boot3.util.Pager" alias="Pager"/>
   	</typeAliases>
   
   </configuration>
