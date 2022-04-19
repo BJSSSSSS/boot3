@@ -52,6 +52,8 @@
    		<select id="getTotalCount" parameterType="Pager" resultType="Long" >
     		SELECT COUNT(NUM) FROM BOARD
     		WHERE
+    		NUM>0
+    		AND
     		<choose>
 		    	<when test="kind == 'col1'">
 		    		TITLE
