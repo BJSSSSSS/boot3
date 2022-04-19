@@ -13,9 +13,16 @@ public class BoardService {
 	@Autowired
 	public BoardMapper boardMapper;
 	
+	//list
 	public List<BoardVO> getList(Pager pager) throws Exception{
 		pager.makeRow();
+		pager.makeNum(boardMapper.getTotalCount(pager));
 		return boardMapper.getList(pager);
+	}
+	
+	//add
+	public int setAdd(BoardVO boardVO) throws Exception{
+		return boardMapper.setAdd(boardVO);
 	}
 	
 	

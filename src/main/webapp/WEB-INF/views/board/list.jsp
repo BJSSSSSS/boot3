@@ -21,17 +21,7 @@
 		</div>
 	</div>
 	
-	<form action="./list" class="search" method="get">
-		<fieldset>
-			<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="kind">
-				<option value="col1">글제목</option>
-				<option value="col2">작성자</option>
-				<option value="col3">글내용</option>
-			</select> 
-			<input type="text" name="search" value="${pager.search}">
-			<button type="submit">검색</button>
-		</fieldset>
-	</form>
+	
 	
 	<div class="row mt-4">
 		<table class="table table-hover">
@@ -62,9 +52,57 @@
 	
 	
 	
-	<div class="row justify-content-end">
-		<a href="./add" type="button" class="col-1 btn btn-outline-primary">WRITE</a>
+	<div class="row justify-content-between">
+		<div class="col-5">
+			<form class="d-flex" action="./list" method="get">
+				<div class="col-4 me-2">
+				<select name="kind" class="form-select" aria-label=".form-select-sm example">
+					<option value="col1">글제목</option>
+					<option value="col2">글내용</option>
+					<option value="col3">작성자</option>
+				</select>
+				</div>
+				<div class="col-6 me-2"> 
+		        	<input name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+		        </div>
+		        <div class="col-2">
+		        	<button class="btn btn-outline-success" type="submit">Search</button>
+		        </div>
+	        </form>
+		</div>
+		<div class="col-1">
+			<a href="./add" type="button" class="btn btn-outline-primary">WRITE</a>
+		</div>
 	</div>
+	
+	<br><br>
+	<div class="position-relative">
+		<div class="position-absolute top-0 start-50 translate-middle">
+			<nav aria-label="Page navigation example">
+			  <ul class="pagination">
+			  
+		    	<li class="page-item">
+		    		<a class="page-link" aria-label="Previous" href="./list?pn=${pager.pre?pager.startNum-1:1}&kind=${pager.kind}&search=${pager.search}">
+				 		<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+			   
+			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+			    	<li class="page-item"><a class="page-link" href="./list?pn=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+			    </c:forEach>
+
+		    	<li class="page-item">
+		    		<a class="page-link" href="./list?pn=${pager.next?pager.lastNum+1:pager.lastNum}&kind=${pager.kind}&search=${pager.search}">
+		    			<span aria-hidden="true">&raquo;</span>
+		    		</a>
+		    	</li>
+			   
+			  </ul>
+			</nav>
+		</div>
+	</div>
+	
+	
 
 </div>
 
