@@ -31,41 +31,36 @@
 	          <a class="nav-link disabled">Disabled</a>
 	        </li>
 	      </ul>
+	      
 	      <ul class="navbar-nav mb-2 mb-lg-0">
 	      	<c:choose>
-		      	<c:when test="${not empty member}">
-			     	<li class="nav-item">
+	      		<c:when test="${not empty member}">
+				    <li class="nav-item">
 			          <a class="nav-link active" aria-current="page" href="/member/mypage">
-			          	MyPage
+			          Mypage <i class="bi bi-person-circle"></i>
 			          </a>
 			        </li>
 			        <li class="nav-item">
 			          <a class="nav-link active" href="/member/logout">
-			          	Logout
+			          LogOut <i class="bi bi-unlock"></i>
 			          </a>
-			        </li>
-		        </c:when>
-		        <c:otherwise>
+			        </li>      		
+	      		</c:when>
+	      		<c:otherwise>
 			        <li class="nav-item">
 			          <a class="nav-link active" aria-current="page" href="/member/join">
-			          	Join
+			          Join <i class="bi bi-person-plus-fill"></i>
 			          </a>
 			        </li>
 			        <li class="nav-item">
 			          <a class="nav-link active" href="/member/login">
-			          	Login
+			          Login <i class="bi bi-lock-fill"></i>
 			          </a>
-			        </li>
+			        </li>	  
 		        </c:otherwise>
-	      	</c:choose>
+	        </c:choose>    
 	      </ul>
 	      
-	      
-	      <!-- search -->
-	      <!-- <form class="d-flex">
-	        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	        <button class="btn btn-outline-success" type="submit">Search</button>
-	      </form> -->
 	    </div>
 	  </div>
 	</nav>

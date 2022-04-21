@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -43,9 +44,125 @@
 		</div>
   	</div>
 
+<div class="container">
+	<input type="text" id="d1">
+	<button id="btn">CLICK</button>
+	<button id="btn2">CLICK2</button>
+	<input type="checkbox" name="ch" class="ch" value="1">
+	<input type="checkbox" name="ch" class="ch" value="2">
+	<input type="checkbox" name="ch" class="ch" value="3">
+	<input type="checkbox" name="ch" class="ch" value="4">
+	<button id="btn3">CLICK3</button>
+	<div id="result">
+		
+	</div>
+</div>
 
 
+<c:import url="./temp/header_script.jsp"></c:import>
 
-<c:import url="./temp/header_script.jsp"></c:import> 
+<script type="text/javascript">
+	//자바 스크립트였으면
+	/* 
+	const btn = document.getElementById("btn3");
+	btn.addEventListener("click", function(){
+		
+	}); 
+	
+	const ch = document.getElementByClassName("ch"); // 배열
+	
+	ch.addEventListener(x)
+	
+	for(c of ch){
+		c.addEventListener("click", function(){
+			alert(this.value);
+		});
+	}
+	
+	*/
+	//
+	
+	//jquery의 좋은점이 반복문을 안돌려도 된다!
+	/* $(".ch").click(function(){
+		console.log(this.value);
+	}); */
+	
+	//여러개 이벤트 넣을경우 {} 추가
+/* 	$(".ch").on({
+		click:function(){
+			console.log("click");
+		},
+		
+		change:function(){
+			console.log("change");
+		}
+
+	}); */
+	
+	
+	$("#btn").on("click", function(){
+		console.log($("#d1").val());
+	});
+	
+	
+	
+	$(".ch").click(function(e){
+		//this는 자기자신을 선택하는 선택자
+		//console.log(this);
+		//console.log($(this));
+		//console.log(e.target);
+		//위 세개다 동일
+		
+		//let v = $(this).val()
+		//console.log(v);
+		
+		let v = $(this).prop("checked");
+		console.log(v);
+		$(".ch").prop("checked", true);
+		
+	});
+	
+	
+	$(".ch").change(function(){
+		console.log("change Test");
+	});
+	
+	
+	$('#btn2').click(function(){
+
+		$(".ch").each(function(idx, item){
+			console.log("Index : ", idx);
+			console.log("Item : ", item);
+			console.log("Value : ", $(item).val());
+		});
+		
+	});
+
+
+	$('#btn').on("click", function(){
+		alert("jquery");
+	});
+	
+	$("#btn3").click(function(){
+		
+		//div로 감싸려면 이렇게
+		let r = "<div>";
+		r = r + '<input type="checkbox" name="ch" class="ch" value="1">';
+		r = r + "</div>";
+		
+		$("#result").append(r);
+
+							//속성명의 값이 "" 가 들어있어서 이 경우에는 ''로 만들어준다!
+		//$("#result").append('<input type="checkbox" name="ch" class="ch" value="1">');
+		
+	});
+	
+	
+	
+
+
+</script>
+
+
 </body>
 </html>

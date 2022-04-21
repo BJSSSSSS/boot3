@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -42,21 +43,12 @@
 		    </div>
 		  </div>
 		  
-		  <div class="row mb-3">
-		    <label for="files" class="col-sm-2 col-form-label">File</label>
-		    <div class="col-sm-10">
-		      <input type="file" name="files" class="form-control"> 
-		    </div>
-		  </div>
 		  
-		  <div class="row mb-3">
-		    <label for="files" class="col-sm-2 col-form-label">File</label>
-		    <div class="col-sm-10">
-		      <input type="file" name="files" class="form-control"> 
-		    </div>
-		  </div>
-		 
-		  <button type="submit" class="btn btn-primary">Write</button>
+		  <button id="fileAdd" type="button" class="btn btn-danger d-block my-4">FileAdd</button>
+		  
+		  <div id="fileResult"></div>
+
+		  <button type="submit" class="btn btn-primary my-4">Write</button>
 		</form>
 	
 	</div>
@@ -65,6 +57,57 @@
 </div>	
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<c:import url="../temp/header_script.jsp"></c:import>
+
+<script type="text/javascript">
+
+	//강사
+	let count = 0;
+
+	$("#fileAdd").on("click", function(){
+		
+		//강사
+		if(count > 4){
+			alert('최대 5개만 가능합니다');
+			return;
+		}
+		
+		let result = '<div class="input-group">';
+		result = result + '<input name="files" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">';
+		result = result + '<button class="btn btn-outline-secondary del" type="button" id="inputGroupFileAddon04">X</button>';
+		result = result + '</div>';
+		
+		$("#fileResult").append(result);
+		count++;
+		
+		//내가 해본것(지우는것 아직 미구현)
+		/* let r = '<div class="row mb-3">';
+		r = r + '<label for="files" class="col-sm-2 col-form-label">File</label>';
+		r = r + '<div class="col-sm-9">';
+		r = r + '<input type="file" name="files" class="form-control">';
+		r = r + '</div>';
+		r = r + '<div class="col-sm-1">';
+		r = r + '<button type="button" id="delete">X</button>';
+		r = r + '</div>';
+		r = r + '</div>';
+
+		$("#fileResult").append(r);
+		//잘 생각해볼것! fileResult가 먼저 생성된것이기에 이거로 이용해줘야함
+		$("#delete").on("click", function(){
+			$("#fileResult").empty();
+		}); */
+		
+	});
+	
+	$("#fileResult").on("click", ".del", function(){
+		
+		$(this).parent().remove();
+		count--;
+			
+	});
+	
+	
+</script>
+
 </body>
 </html>
