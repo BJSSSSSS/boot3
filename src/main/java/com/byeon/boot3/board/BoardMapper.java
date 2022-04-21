@@ -13,14 +13,17 @@ public interface BoardMapper {
 	//insert : setFileAdd
 	public int setFileAdd(BoardFilesVO boardFilesVO) throws Exception;
 	
-	//delete : setFileDelete
-	public int setFileDelete(BoardFilesVO boardFilesVO) throws Exception;
+	//list   : getFileList
+	public List<BoardFilesVO> getFileList(BoardVO boardVO) throws Exception;
 	
 	//detail : getFileDetail
 	public BoardFilesVO getFileDetail(BoardFilesVO boardFilesVO) throws Exception;
 	
-	//list   : getFileList
-	public List<BoardFilesVO> getFileList() throws Exception;
+	//위 세개만 쓰는중
+	//delete : setFileDelete
+	public int setFileDelete(BoardFilesVO boardFilesVO) throws Exception;
+	
+	
 
 	
 	//board

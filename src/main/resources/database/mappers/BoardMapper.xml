@@ -10,25 +10,67 @@
     		INSERT INTO BOARDFILES(FILENUM, NUM, FILENAME, ORINAME)
     		VALUES(NULL, #{num}, #{fileName}, #{oriName})
     	</insert>
+    	
+    	<select id="getFileList" resultType="BoardFilesVO" parameterType="BoardVO">
+    		SELECT * FROM BOARDFILES WHERE NUM=#{num}
+    	</select>
+    	
+    	<select id="getFileDetail" parameterType="BoardFilesVO" resultType="BoardFilesVO">
+    		SELECT * FROM BOARDFILES WHERE FILENUM=#{fileNum}
+    	</select>
+    	
+    	<!-- 위 세개만 쓰는중 -->
     
     	<delete id="setFileDelete" parameterType="BoardFilesVO">
     		DELETE FROM BOARDFILES WHERE FILENUM=#{fileNum}
     	</delete>
     	
-    	<select id="getFileDetail" parameterType="BoardFilesVO" resultType="BoardFilesVO">
-    		SELECT * FROM BOARDFILES WHERE FILENUM=#{fileNum}
-    	</select>
     
-    	<select id="getFileList" resultType="BoardFilesVO">
-    		SELECT * FROM BOARDFILES ORDER BY FILENUM DESC
-    	</select>
     
 
     	<!-- board -->
-    	<select id="getDetail" parameterType="BoardVO" resultType="BoardVO">
-    		SELECT * FROM BOARD WHERE NUM=#{num}
+    	<!-- <select id="getDetail" parameterType="BoardVO" resultType="BoardVO">
+    		SELECT B.*, BF.* 
+    		FROM
+    			BOARD B
+    				LEFT OUTER JOIN
+    			BOARDFILES BF
+    			ON B.NUM = BF.NUM
+    		WHERE B.NUM=#{num}
+    	</select> -->
+    	
+    	<select id="getDetail" parameterType="BoardVO" resultMap="detailResult">
+    		SELECT B.*, BF.* 
+    		FROM
+    			BOARD B
+    				LEFT JOIN
+    			BOARDFILES BF
+    			<!-- 해당하는것과 갖고오는 컬럼명이 같을때는 USING도 사용 가능 -->
+    			<!-- ON B.NUM = BF.NUM -->
+    			USING(NUM)
+    		<!-- WHERE B.NUM = #{num} -->
+    		WHERE NUM = #{num}
     	</select>
-    
+    	
+		<resultMap type="BoardVO" id="detailResult">
+			<id column="num" property="num"/>
+			<result column="title" property="title"/>
+			<result column="writer" property="writer"/>
+			<result column="contents" property="contents"/>
+			<result column="hit" property="hit"/>
+			<result column="regDate" property="regDate"/>
+			<result column="ref" property="ref"/>
+			<result column="step" property="step"/>
+			<result column="depth" property="depth"/>
+			<result column="category" property="category"/>
+			<!-- 1대1은 association 1대N은 collection -->
+			<collection property="fileVOs" javaType="java.util.List" ofType="BoardFilesVO">
+				<id column="fileNum" property="fileNum"/>
+				<result column="fileName" property="fileName"/>
+				<result column="oriName" property="oriName"/>
+			</collection>
+		</resultMap>    	
+
     	<select id="getList" parameterType="Pager" resultType="BoardVO">
     		SELECT * FROM BOARD 
     		WHERE NUM>0 
@@ -49,7 +91,7 @@
     		LIMIT #{startRow}, #{perPage}
     	</select>
     
-   		<select id="getTotalCount" parameterType="Pager" resultType="Long" >
+   		<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long" >
     		SELECT COUNT(NUM) FROM BOARD
     		WHERE
     		NUM>0
@@ -69,9 +111,9 @@
     	</select>
     	
     	
-    	<insert id="setAdd" parameterType="BoardVO">
+    	<insert id="setAdd" parameterType="BoardVO" useGeneratedKeys="true"  keyProperty="num">
     		INSERT INTO BOARD(NUM, TITLE, WRITER, CONTENTS, HIT, REGDATE, REF, STEP, DEPTH, CATEGORY)
-    		VALUES(NULL, #{title}, #{writer}, #{contents}, 0, now(), 0, 0, 0, 1)
+    		VALUES(#{num}, #{title}, #{writer}, #{contents}, 0, now(), 0, 0, 0, 1)
     	</insert>
     
     	<update id="setUpdate" parameterType="BoardVO">

@@ -1,6 +1,7 @@
 package com.byeon.boot3.board;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -17,6 +18,9 @@ public class BoardVO {
 	private Long step;
 	private Long depth;
 	private Integer category;
+	
+	//파일들 담는 변수 생성
+	private List<BoardFilesVO> fileVOs;
 	
 
 }

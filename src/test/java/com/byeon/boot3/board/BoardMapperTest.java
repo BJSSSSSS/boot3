@@ -49,11 +49,11 @@ class BoardMapperTest{
 	
 	//board
 	//detail
-	//@Test
+	@Test
 	void getDetailTest() throws Exception {
 		
 		BoardVO boardVO = new BoardVO();
-		boardVO.setNum(3L);
+		boardVO.setNum(113L);
 		boardVO = boardMapper.getDetail(boardVO);
 		
 		System.out.println(boardVO.toString());

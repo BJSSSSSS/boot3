@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="container-fluid">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	  <div class="container-fluid">
@@ -31,10 +31,41 @@
 	          <a class="nav-link disabled">Disabled</a>
 	        </li>
 	      </ul>
-	      <form class="d-flex">
+	      <ul class="navbar-nav mb-2 mb-lg-0">
+	      	<c:choose>
+		      	<c:when test="${not empty member}">
+			     	<li class="nav-item">
+			          <a class="nav-link active" aria-current="page" href="/member/mypage">
+			          	MyPage
+			          </a>
+			        </li>
+			        <li class="nav-item">
+			          <a class="nav-link active" href="/member/logout">
+			          	Logout
+			          </a>
+			        </li>
+		        </c:when>
+		        <c:otherwise>
+			        <li class="nav-item">
+			          <a class="nav-link active" aria-current="page" href="/member/join">
+			          	Join
+			          </a>
+			        </li>
+			        <li class="nav-item">
+			          <a class="nav-link active" href="/member/login">
+			          	Login
+			          </a>
+			        </li>
+		        </c:otherwise>
+	      	</c:choose>
+	      </ul>
+	      
+	      
+	      <!-- search -->
+	      <!-- <form class="d-flex">
 	        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 	        <button class="btn btn-outline-success" type="submit">Search</button>
-	      </form>
+	      </form> -->
 	    </div>
 	  </div>
 	</nav>

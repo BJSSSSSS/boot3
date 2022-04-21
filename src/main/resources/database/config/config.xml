@@ -8,6 +8,8 @@
   	<typeAliases>
   		<typeAlias type="com.byeon.boot3.board.BoardVO" alias="BoardVO"/>
   		<typeAlias type="com.byeon.boot3.board.BoardFilesVO" alias="BoardFilesVO"/>
+  		<typeAlias type="com.byeon.boot3.member.MemberVO" alias="MemberVO"/>
+  		<typeAlias type="com.byeon.boot3.member.MemberFilesVO" alias="MemberFilesVO"/>
   		<typeAlias type="com.byeon.boot3.util.Pager" alias="Pager"/>
   	</typeAliases>
   
