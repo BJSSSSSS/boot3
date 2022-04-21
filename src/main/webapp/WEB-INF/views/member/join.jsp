@@ -16,47 +16,61 @@
 <div class="container mt-4">
 	<div class="row mt-4">
 		<div class="alert alert-light" role="alert">
-	  		<h4 style="text-transform: uppercase;">${board} Write</h4>
+	  		<h4 style="text-transform: uppercase;">${board} Join</h4>
 		</div>
 	</div>
 	
 	
 	<div class="row mt-4">
-		<form action="./add" method="post" enctype="multipart/form-data">
+		<form action="./join" method="post" enctype="multipart/form-data">
 		  <div class="row mb-3">
-		    <label for="title" class="col-sm-2 col-form-label">Title</label>
+		    <label for="id" class="col-sm-2 col-form-label">ID</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="title" name="title">
+		      <input type="text" class="form-control" id="id" name="id">
 		    </div>
 		  </div>
 		  <div class="row mb-3">
-		    <label for="writer" class="col-sm-2 col-form-label">Writer</label>
+		    <label for="pw" class="col-sm-2 col-form-label">PW</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="writer" name="writer">
+		      <input type="password" class="form-control" id="pw" name="pw">
 		    </div>
 		  </div>
 		  <div class="row mb-3">
-		    <label for="contents" class="col-sm-2 col-form-label">Contents</label>
+		    <label for="pwC" class="col-sm-2 col-form-label">PWCHECK</label>
 		    <div class="col-sm-10">
-		      <textarea class="form-control" id="contents" name="contents"></textarea>
+		      <input type="password" class="form-control" id="pwC" name="pwC">
+		    </div>
+		  </div>
+		  <div class="row mb-3">
+		     <label for="name" class="col-sm-2 col-form-label">NAME</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="name" name="name">
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
-		    <label for="files" class="col-sm-2 col-form-label">File</label>
+		     <label for="email" class="col-sm-2 col-form-label">EMAIL</label>
 		    <div class="col-sm-10">
-		      <input type="file" name="files" class="form-control"> 
+		      <input type="text" class="form-control" id="email" name="email">
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
-		    <label for="files" class="col-sm-2 col-form-label">File</label>
+		     <label for="phone" class="col-sm-2 col-form-label">PHONE</label>
 		    <div class="col-sm-10">
-		      <input type="file" name="files" class="form-control"> 
+		      <input type="text" class="form-control" id="phone" name="phone">
 		    </div>
 		  </div>
-		 
-		  <button type="submit" class="btn btn-primary">Write</button>
+		  
+		  <div class="row mb-3">
+		    <label for="photo" class="col-sm-2 col-form-label">File</label>
+		    <div class="col-sm-10">
+		      <input type="file" name="photo" class="form-control"> 
+		    </div>
+		  </div>
+		  
+		  
+		  <button type="submit" class="btn btn-primary">Join</button>
 		</form>
 	
 	</div>
