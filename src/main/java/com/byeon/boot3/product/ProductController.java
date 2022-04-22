@@ -38,7 +38,6 @@ public class ProductController {
 		mv.addObject("pager", pager);
 		mv.setViewName("product/list");
 		return mv;
-
 	}
 
 	
@@ -56,6 +55,17 @@ public class ProductController {
 
 		mv.setViewName("redirect:./list");
 
+		return mv;
+	}
+	
+	//delete
+	@GetMapping("delete")
+	public ModelAndView setDelete(ProductVO productVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = productService.setDelete(productVO);
+		
+		mv.setViewName("redirect:./list");
 		return mv;
 	}
 	

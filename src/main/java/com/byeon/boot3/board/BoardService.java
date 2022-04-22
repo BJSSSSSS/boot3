@@ -65,25 +65,27 @@ public class BoardService {
 		//이 과정 전에 boardMapper.xml -> add문에서 num변수 잡아주는것 진행!
 		//System.out.println("Insert 후 : " + boardVO.getNum());
 		
+		if(files != null) {
 		
-		//이걸 반복해서 넣어주기
-		for(MultipartFile mf : files) {
-			
-			//파일이 비어있으면 위로 올라가세요
-			if(mf.isEmpty()) {
-				continue;
+			//이걸 반복해서 넣어주기
+			for(MultipartFile mf : files) {
+				
+				//파일이 비어있으면 위로 올라가세요
+				if(mf.isEmpty()) {
+					continue;
+				}
+				
+				//1. File을 HDD에 저장
+				String fileName = fileManager.fileSave(mf, "resources/upload/board/");
+				System.out.println(fileName);
+				
+				//2. 저장된 정보를 DB에 저장
+				BoardFilesVO boardFilesVO = new BoardFilesVO();
+				boardFilesVO.setNum(boardVO.getNum());
+				boardFilesVO.setFileName(fileName);
+				boardFilesVO.setOriName(mf.getOriginalFilename());
+				boardMapper.setFileAdd(boardFilesVO);
 			}
-			
-			//1. File을 HDD에 저장
-			String fileName = fileManager.fileSave(mf, "resources/upload/board/");
-			System.out.println(fileName);
-			
-			//2. 저장된 정보를 DB에 저장
-			BoardFilesVO boardFilesVO = new BoardFilesVO();
-			boardFilesVO.setNum(boardVO.getNum());
-			boardFilesVO.setFileName(fileName);
-			boardFilesVO.setOriName(mf.getOriginalFilename());
-			boardMapper.setFileAdd(boardFilesVO);
 		}
 		
 		return result;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.byeon.boot3.board.BoardFilesVO;
 import com.byeon.boot3.util.FileManager;
 import com.byeon.boot3.util.Pager;
 
@@ -30,20 +31,40 @@ public class ProductService {
 		
 		int result = productMapper.setAdd(productVO);
 		
-		for(MultipartFile f : files) {
-			
-			if(f.isEmpty()) {
-				continue;
+		if(files != null) {
+
+			for(MultipartFile f : files) {
+				
+				if(f.isEmpty()) {
+					continue;
+				}
+				
+				String fileName = fileManager.fileSave(f, "resources/upload/product/");
+				
+				ProductFilesVO productFilesVO = new ProductFilesVO();
+				productFilesVO.setProductNum(productVO.getProductNum());
+				productFilesVO.setFileName(fileName);
+				productFilesVO.setOriName(f.getOriginalFilename());
+				productMapper.setFileAdd(productFilesVO);
+				
 			}
-			
-			String fileName = fileManager.fileSave(f, "resources/upload/product/");
-			
-			ProductFilesVO productFilesVO = new ProductFilesVO();
-			productFilesVO.setProductNum(productVO.getProductNum());
-			productFilesVO.setFileName(fileName);
-			productFilesVO.setOriName(f.getOriginalFilename());
-			productMapper.setFileAdd(productFilesVO);
-			
+
+		}
+		
+		return result;
+	}
+	
+	//delete
+	public int setDelete(ProductVO productVO) throws Exception{
+		
+		List<ProductFilesVO> ar = productMapper.getFileList(productVO);
+		
+		int result = productMapper.setDelete(productVO);
+		
+		if(result > 0) {
+			for(ProductFilesVO vo: ar) {
+				boolean check = fileManager.remove("resources/upload/product/", vo.getFileName());
+			}
 		}
 	
 		return result;

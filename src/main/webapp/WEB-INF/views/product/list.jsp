@@ -22,34 +22,25 @@
 		</div>
 	</div>
 	
-	
-	
-	<div class="row mt-4">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>ProductNum</th>
-					<th>ProductName</th>
-					<th>ProductPrice</th>
-					<th>ProductCount</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach items="${list}" var="vo">
-				<tr>
-					<td>${vo.productNum}</td>
-					<td><a class="link-dark text-decoration-none" href="./detail?num=${vo.productNum}">${vo.productName}</a></td>
-					<td>${vo.productPrice}</td>
-					<td>${vo.productCount}</td>
-				</tr>
-			</c:forEach>	
-			</tbody>
-			
-		</table>
+	<div class="row row-cols-2 row-cols-md-4 mb-4 text-center">
+		<c:forEach items="${list}" var="vo" varStatus="i">
+			<div class="col">
+				<div class="card mb-4 rounded-3 shadow-sm" style="width: 18rem;">
+					<img src="../resources/upload/product/${vo.filesVOs[0].fileName}" class="card-img-top" alt="...">
+			  		<div class="card-body">
+			    		<h6 class="card-title">챔피언 이름</h6>
+			    		<p class="card-text">${vo.productName}</p>
+			  		</div>
+			  		<ul class="list-group list-group-flush">
+					    <li class="list-group-item">챔피언 가격 : ${vo.productPrice}</li>
+					</ul>
+					<div class="card-body">
+		    			<p class="card-text">${vo.productDetail}</p>
+		  			</div>
+				</div>
+			</div>	
+		</c:forEach>
 	</div>
-	
-	
-	
 	
 	<div class="row justify-content-between">
 		<div class="col-5">

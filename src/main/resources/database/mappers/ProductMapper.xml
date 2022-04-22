@@ -5,23 +5,41 @@
     
     <mapper namespace="com.byeon.boot3.product.ProductMapper">
     
-    	<select id="getList" resultType="ProductVO" parameterType="Pager">
-    		SELECT * FROM PRODUCT
-    		WHERE PRODUCTNUM > 0
-    		AND 
-    		<!-- 일단 NAME만 가능하게 -->
-    		<choose>
-		    	<when test="kind == 'col1'">
-		    		PRODUCTNAME
-		    	</when>
-		    	<otherwise>
-		    		PRODUCTNAME
-		    	</otherwise>
-			</choose>
-    		LIKE CONCAT('%',#{search},'%')
-    		ORDER BY PRODUCTNUM DESC 
+    	<!-- product -->
+    	<select id="getList" resultMap="fileAddResult" parameterType="Pager">
+    		SELECT P.*, PF.* FROM
+    			(SELECT * FROM PRODUCT WHERE
+	    		PRODUCTNUM > 0
+	    		AND 
+	    		<!-- 일단 NAME만 가능하게 -->
+	    		<choose>
+			    	<when test="kind == 'col1'">
+			    		PRODUCTNAME
+			    	</when>
+			    	<otherwise>
+			    		PRODUCTNAME
+			    	</otherwise>
+				</choose>
+	    		LIKE CONCAT('%',#{search},'%')
+	    		ORDER BY PRODUCTNUM DESC) P
+	    			LEFT JOIN
+	    		PRODUCTFILES PF
+    			USING(PRODUCTNUM)
     		LIMIT #{startRow}, #{perPage}
     	</select>
+    	
+    	<resultMap type="ProductVO" id="fileAddResult">
+			<id column="productNum" property="productNum"/>
+			<result column="productName" property="productName"/>
+			<result column="productPrice" property="productPrice"/>
+			<result column="productCount" property="productCount"/>
+			<result column="productDetail" property="productDetail"/>
+			<collection property="filesVOs" javaType="java.util.List" ofType="ProductFilesVO">
+				<id column="fileNum" property="fileNum"/>
+				<result column="fileName" property="fileName"/>
+				<result column="oriName" property="oriName"/>
+			</collection>
+		</resultMap>
     	
     	<select id="total" parameterType="Pager" resultType="java.lang.Long" >
     		SELECT COUNT(PRODUCTNUM) FROM PRODUCT
@@ -50,6 +68,17 @@
     		VALUES(NULL, #{productNum}, #{fileName}, #{oriName})
     	</insert>
     
+    
+    	<delete id="setDelete" parameterType="ProductVO">
+    		DELETE FROM PRODUCT WHERE PRODUCTNUM = #{productNum}
+    	</delete>
+    	
+    	
+    	
+    	<!-- productFile -->
+    	<select id="getFileList" parameterType="ProductVO" resultType="ProductFilesVO">
+    		SELECT * FROM PRODUCTFILES WHERE PRODUCTNUM = #{productNum}
+    	</select>
     
     
     

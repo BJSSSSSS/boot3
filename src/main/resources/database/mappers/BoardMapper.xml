@@ -64,7 +64,7 @@
 			<result column="depth" property="depth"/>
 			<result column="category" property="category"/>
 			<!-- 1대1은 association 1대N은 collection -->
-			<collection property="fileVOs" javaType="java.util.List" ofType="BoardFilesVO">
+			<collection property="filesVOs" javaType="java.util.List" ofType="BoardFilesVO">
 				<id column="fileNum" property="fileNum"/>
 				<result column="fileName" property="fileName"/>
 				<result column="oriName" property="oriName"/>

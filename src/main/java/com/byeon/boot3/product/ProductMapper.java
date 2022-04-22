@@ -21,7 +21,11 @@ public interface ProductMapper {
 	//total
 	public Long total(Pager pager) throws Exception;
 	
+	//delete
+	public int setDelete(ProductVO productVO) throws Exception;
 	
+	//fileList(지우려고)
+	public List<ProductFilesVO> getFileList(ProductVO productVO) throws Exception;
 	
 	
 

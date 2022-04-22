@@ -9,6 +9,15 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <!-- 맨 위로 올림 -->
+  <c:import url="../temp/header_script.jsp"></c:import>
+  
+  <!-- include summernote css/js -->
+  <!-- 위지위그 사용하기 위해 갖고옴 -->
+  <!-- include summernote css/js-->
+  <!-- <link href="summernote-bs5.css" rel="stylesheet">
+  <script src="summernote-bs5.js"></script> -->
+  
 <title>Insert title here</title>
 </head>
 <body>
@@ -63,9 +72,15 @@
 </div>	
 
 
-<c:import url="../temp/header_script.jsp"></c:import>
+
 
 <script type="text/javascript">
+	//summernote
+	/*  $('#productDetail').summernote({
+        placeholder: 'Hello Bootstrap 5',
+        tabsize: 2,
+        height: 100
+      }); */
 
 	//강사
 	let count = 0;
