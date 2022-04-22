@@ -28,21 +28,19 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Num</th>
-					<th>Title</th>
-					<th>Writer</th>
-					<th>Hit</th>
-					<th>Date</th>
+					<th>ProductNum</th>
+					<th>ProductName</th>
+					<th>ProductPrice</th>
+					<th>ProductCount</th>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach items="${list}" var="vo">
 				<tr>
-					<td>${vo.num}</td>
-					<td><a class="link-dark text-decoration-none" href="./detail?num=${vo.num}">${vo.title}</a></td>
-					<td>${vo.writer}</td>
-					<td>${vo.hit}</td>
-					<td>${vo.regDate}</td>
+					<td>${vo.productNum}</td>
+					<td><a class="link-dark text-decoration-none" href="./detail?num=${vo.productNum}">${vo.productName}</a></td>
+					<td>${vo.productPrice}</td>
+					<td>${vo.productCount}</td>
 				</tr>
 			</c:forEach>	
 			</tbody>
@@ -58,9 +56,9 @@
 			<form class="d-flex" action="./list" method="get">
 				<div class="col-4 me-2">
 				<select name="kind" class="form-select" aria-label=".form-select-sm example">
-					<option value="col1">글제목</option>
-					<option value="col2">글내용</option>
-					<option value="col3">작성자</option>
+					<option value="col1">상품명</option>
+					<!-- <option value="col2">글내용</option>
+					<option value="col3">작성자</option> -->
 				</select>
 				</div>
 				<div class="col-6 me-2"> 

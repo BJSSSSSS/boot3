@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.byeon.boot3.product.ProductMapper">
+    
+    	<select id="getList" resultType="ProductVO" parameterType="Pager">
+    		SELECT * FROM PRODUCT
+    		WHERE PRODUCTNUM > 0
+    		AND 
+    		PRODUCTNAME
+    		LIKE CONCAT('%',#{search},'%')
+    		ORDER BY PRODUCTNUM DESC 
+    		LIMIT #{startRow}, #{perPage}
+    	</select>
+    	
+    	<insert id="setAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
+    		INSERT INTO PRODUCT(PRODUCTNUM, PRODUCTNAME, PRODUCTPRICE, PRODUCTCOUNT, PRODUCTDETAIL)
+    		VALUES(#{productNum}, #{productName}, #{productPrice}, #{productCount}, #{productDetail})
+    	</insert>
+    	
+    	<insert id="setFileAdd" parameterType="ProductFilesVO">
+    		INSERT INTO PRODUCTFILES
+    		VALUES(NULL, #{productNum}, #{fileName}, #{oriName})
+    	</insert>
+    
+    
+    
+    
+    </mapper>

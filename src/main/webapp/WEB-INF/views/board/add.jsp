@@ -100,7 +100,7 @@
 	});
 	
 	$("#fileResult").on("click", ".del", function(){
-		
+		//대상의 부모를 찾아 지움
 		$(this).parent().remove();
 		count--;
 			
