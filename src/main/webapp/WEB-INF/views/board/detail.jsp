@@ -32,7 +32,7 @@
 				<h6>첨부파일</h6>
 				
 				<ul class="list-group list-group-flush">
-					<c:forEach items="${vo.fileVOs}" var="f">
+					<c:forEach items="${vo.filesVOs}" var="f">
 						<li class="list-group-item">
 							<a href="./fileDown?fileNum=${f.fileNum}">${f.oriName}</a>
 						</li>

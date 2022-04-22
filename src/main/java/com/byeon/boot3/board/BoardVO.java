@@ -20,7 +20,7 @@ public class BoardVO {
 	private Integer category;
 	
 	//파일들 담는 변수 생성
-	private List<BoardFilesVO> fileVOs;
+	private List<BoardFilesVO> filesVOs;
 	
 
 }

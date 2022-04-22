@@ -18,7 +18,8 @@ public interface ProductMapper {
 	//list
 	public List<ProductVO> getList(Pager pager) throws Exception;
 	
-	
+	//total
+	public Long total(Pager pager) throws Exception;
 	
 	
 	

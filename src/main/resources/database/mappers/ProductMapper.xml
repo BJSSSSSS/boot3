@@ -9,11 +9,36 @@
     		SELECT * FROM PRODUCT
     		WHERE PRODUCTNUM > 0
     		AND 
-    		PRODUCTNAME
+    		<!-- 일단 NAME만 가능하게 -->
+    		<choose>
+		    	<when test="kind == 'col1'">
+		    		PRODUCTNAME
+		    	</when>
+		    	<otherwise>
+		    		PRODUCTNAME
+		    	</otherwise>
+			</choose>
     		LIKE CONCAT('%',#{search},'%')
     		ORDER BY PRODUCTNUM DESC 
     		LIMIT #{startRow}, #{perPage}
     	</select>
+    	
+    	<select id="total" parameterType="Pager" resultType="java.lang.Long" >
+    		SELECT COUNT(PRODUCTNUM) FROM PRODUCT
+    		WHERE PRODUCTNUM > 0
+    		AND
+    		<!-- 일단 NAME만 가능하게 -->
+    		<choose>
+		    	<when test="kind == 'col1'">
+		    		PRODUCTNAME
+		    	</when>
+		    	<otherwise>
+		    		PRODUCTNAME
+		    	</otherwise>
+			</choose>
+    		LIKE CONCAT('%',#{search},'%')
+    	</select>
+    	
     	
     	<insert id="setAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
     		INSERT INTO PRODUCT(PRODUCTNUM, PRODUCTNAME, PRODUCTPRICE, PRODUCTCOUNT, PRODUCTDETAIL)
