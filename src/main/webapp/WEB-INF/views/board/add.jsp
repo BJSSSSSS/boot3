@@ -4,12 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-<title>Insert title here</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  
+  	<!-- 맨 위로 올림 -->
+	<!-- 위지위그 사용하기위해 먼저 선언 -->
+	<c:import url="../temp/header_script.jsp"></c:import>
+  
+	<!-- include summernote css/js -->
+	<!-- 위지위그 사용하기 위해 갖고옴 -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	
+	<title>Insert title here</title>
+	
 </head>
 <body>
 <c:import url="../temp/header.jsp"></c:import>
@@ -57,9 +68,17 @@
 </div>	
 
 
-<c:import url="../temp/header_script.jsp"></c:import>
+
 
 <script type="text/javascript">
+
+	//summernote
+	$('#contents').summernote({
+		height: 300,                 
+		minHeight: null,            
+		maxHeight: null,            
+		focus: true
+	});
 
 	//강사
 	let count = 0;

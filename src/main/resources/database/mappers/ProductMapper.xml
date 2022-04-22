@@ -8,24 +8,41 @@
     	<!-- product -->
     	<select id="getList" resultMap="fileAddResult" parameterType="Pager">
     		SELECT P.*, PF.* FROM
-    			(SELECT * FROM PRODUCT WHERE
-	    		PRODUCTNUM > 0
-	    		AND 
-	    		<!-- 일단 NAME만 가능하게 -->
-	    		<choose>
-			    	<when test="kind == 'col1'">
-			    		PRODUCTNAME
-			    	</when>
-			    	<otherwise>
-			    		PRODUCTNAME
-			    	</otherwise>
-				</choose>
-	    		LIKE CONCAT('%',#{search},'%')
-	    		ORDER BY PRODUCTNUM DESC) P
+    			(
+    				SELECT * FROM PRODUCT WHERE
+		    		PRODUCTNUM > 0
+		    		AND 
+		    		<!-- 일단 NAME만 가능하게 -->
+		    		<choose>
+				    	<when test="kind == 'col1'">
+				    		PRODUCTNAME
+				    	</when>
+				    	<otherwise>
+				    		PRODUCTDETAIL
+				    	</otherwise>
+					</choose>
+		    		LIKE CONCAT('%',#{search},'%')
+		    		ORDER BY PRODUCTNUM DESC
+		    		LIMIT #{startRow}, #{perPage}
+		    	) P
 	    			LEFT JOIN
 	    		PRODUCTFILES PF
     			USING(PRODUCTNUM)
-    		LIMIT #{startRow}, #{perPage}
+
+    		<!-- 강사
+    		SELECT
+    		FROM 
+    		(
+    			SELECT 
+    				*
+    			FROM PRODUCT 
+    			WHERE PRODUCTNUM>0 ORDER BY PRODUCTNUM DESC
+    			LIMIT #{startRow}, #{perPage}
+    		) P
+    		LEFT JOIN
+    		PRODUCTFILES F
+    		USING(PRODUCTNUM)
+    		-->
     	</select>
     	
     	<resultMap type="ProductVO" id="fileAddResult">
@@ -51,7 +68,7 @@
 		    		PRODUCTNAME
 		    	</when>
 		    	<otherwise>
-		    		PRODUCTNAME
+		    		PRODUCTDETAIL
 		    	</otherwise>
 			</choose>
     		LIKE CONCAT('%',#{search},'%')

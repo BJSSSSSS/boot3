@@ -48,8 +48,7 @@
 				<div class="col-4 me-2">
 				<select name="kind" class="form-select" aria-label=".form-select-sm example">
 					<option value="col1">상품명</option>
-					<!-- <option value="col2">글내용</option>
-					<option value="col3">작성자</option> -->
+					<option value="col2">상품내용</option>
 				</select>
 				</div>
 				<div class="col-6 me-2"> 
