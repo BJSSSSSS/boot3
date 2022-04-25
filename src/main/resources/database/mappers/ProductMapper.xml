@@ -6,6 +6,8 @@
     <mapper namespace="com.byeon.boot3.product.ProductMapper">
     
     	<!-- product -->
+    
+    
     	<select id="getList" resultMap="fileAddResult" parameterType="Pager">
     		SELECT P.*, PF.* FROM
     			(

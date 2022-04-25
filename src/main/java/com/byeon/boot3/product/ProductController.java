@@ -52,11 +52,28 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = productService.setAdd(productVO, files);
-
-		mv.setViewName("redirect:./list");
+		mv.setViewName("common/result");
+		mv.addObject("result", result);
+		//동기방식일 경우
+//		mv.setViewName("redirect:./list");
 
 		return mv;
 	}
+	
+	
+	//list
+	@GetMapping("ajaxList")
+	public ModelAndView getAjaxList(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		List<ProductVO> ar = productService.getList(pager);
+		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
+		mv.setViewName("common/productList");
+		return mv;
+	}
+	
+	
 	
 	//delete
 	@GetMapping("delete")

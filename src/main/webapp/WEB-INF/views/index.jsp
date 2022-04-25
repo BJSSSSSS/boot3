@@ -43,8 +43,9 @@
 		  </button>
 		</div>
   	</div>
-
-<div class="container">
+  	
+<!-- 예제 -->
+<!-- <div class="container">
 	<input type="text" id="d1">
 	<button id="btn">CLICK</button>
 	<button id="btn2">CLICK2</button>
@@ -56,12 +57,85 @@
 	<div id="result">
 		
 	</div>
+</div> -->
+
+<div class="container">
+	<input type="text" id="v1">
+	
+	<input type="checkbox" class="num" name="num" value="a">
+	<input type="checkbox" class="num" name="num" value="b">
+	<input type="checkbox" class="num" name="num" value="c">
+	<input type="checkbox" class="num" name="num" value="d">
+	
+	<button id="btn1">GET</button>
+	<button id="btn2">POST</button>
+    <button id="btn3">AJAX</button>
 </div>
+
+
 
 
 <c:import url="./temp/header_script.jsp"></c:import>
 
 <script type="text/javascript">
+
+
+	$("#btn1").on("click", function(){
+		let v = $("#v1").val();
+		console.log(v);
+		$.get("./getTest?msg="+v, function(data){
+			console.log("응답 완료");
+			console.log(data.trim());
+		});
+	});
+
+	
+	//btn2를 click하면 v1의 입력된 값을 /postTest 요청시 파라미터 전송
+	//응답으로 getResult.jsp 받아온다
+	
+	$("#btn2").on("click", function(){
+		//console.log($("#v1").val());
+		$.post("./postTest", {msg:$("#v1").val()}, function(data){
+			console.log(data.trim());
+		})
+	});
+	
+	
+	$("#btn3").click(function() {
+		
+		let ar = [1, 2, 3];
+		let nums = [];
+		
+		$(".num").each(function(idx,item){
+			if($(item).prop("checked")){
+				nums.push($(item).val());
+			}
+		});
+	
+		let v = $("#v1").val();
+		$.ajax({
+			type: "POST",
+			url: "./arrayTest",
+			traditional: true,
+			data: {
+				msg: v,
+				numbers: ar,
+				nums: nums
+			},
+			success:function(d){
+				console.log(d.trim());
+			},
+			error:function(){
+				alert("에러 발생");
+			}
+		});
+	});
+	
+	
+
+
+
+	//예제들
 	//자바 스크립트였으면
 	/* 
 	const btn = document.getElementById("btn3");
@@ -99,7 +173,7 @@
 
 	}); */
 	
-	
+/* 	
 	$("#btn").on("click", function(){
 		console.log($("#d1").val());
 	});
@@ -156,7 +230,7 @@
 		//$("#result").append('<input type="checkbox" name="ch" class="ch" value="1">');
 		
 	});
-	
+	 */
 	
 	
 

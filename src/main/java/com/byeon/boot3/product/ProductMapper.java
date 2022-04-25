@@ -9,6 +9,7 @@ import com.byeon.boot3.util.Pager;
 @Mapper
 public interface ProductMapper {
 	
+
 	//insert
 	public int setAdd(ProductVO productVO) throws Exception; 
 	
