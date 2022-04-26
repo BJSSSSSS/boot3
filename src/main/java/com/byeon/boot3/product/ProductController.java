@@ -51,11 +51,16 @@ public class ProductController {
 	public ModelAndView setAdd(ProductVO productVO, MultipartFile [] files) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+//		for(MultipartFile f: files) {
+//			System.out.println(f.getOriginalFilename());
+//			System.out.println(f.getSize());
+//		}
+		
 		int result = productService.setAdd(productVO, files);
 		mv.setViewName("common/result");
 		mv.addObject("result", result);
-		//동기방식일 경우
-//		mv.setViewName("redirect:./list");
+		//비동기 방식일 경우
+		//mv.setViewName("redirect:./list");
 
 		return mv;
 	}

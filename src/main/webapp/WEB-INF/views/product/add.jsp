@@ -125,9 +125,77 @@
 	}
 
 	
-
-	//ajax
+	//ajax 파일업로드 강사용
 	$("#ajaxAdd").on("click", function(){
+		
+		let formData = new FormData();
+		
+		let productName = $("#productName").val();
+		let productPrice = $("#productPrice").val();
+		let productCount = $("#productCount").val();
+		let productDetail = $("#productDetail").summernote("code");
+		
+		$(".files").each(function(idx, item) {
+			if(item.files.length > 0){				//length가 있는것들, file이 들어온것들 선택
+				console.log(idx);					//index 번호
+				console.log(item);					//<input type="file">
+				console.log(item.files);			//input 태그의 file List
+				console.log(item.files[0]);			//file list중 첫번째 파일
+				console.log(item.files.length);		//file list중 첫번째 파일의 길이
+				console.log(item.files[0].name);	//file list중 첫번째 파일의 이름
+				//formData.append("파라미터명", 값);
+				formData.append("files", item.files[0]);
+			}
+		});//each 끝
+		
+		formData.append('productName',  productName);
+		formData.append('productPrice', productPrice);
+		formData.append('productCount', productCount);
+		formData.append('productDetail', productDetail);
+		
+		$.ajax({
+			type: "POST",
+			url: "./add",
+		    processData: false,
+		    contentType: false,
+			data:formData,
+				
+				/* {
+				productName: $("#productName").val(),
+				productPrice: $("#productPrice").val(),
+				productCount: $("#productCount").val(),
+				productDetail: $("#productDetail").summernote("code") // $("#productDetail").val()
+													//뒤에 주석처리된것과 같은건데 summernote의 value를 가지고 올수 있는 코드
+			},  */ 
+			 
+			
+			success:function(data){
+				if(data.trim() == '1'){
+					alert("상품 등록 완료");
+					//다시 호출해서 가지고오고
+					//들어있는 값들 초기화
+					getList();
+					$("#productName").val("");
+					$("#productPrice").val("");
+					$("#productCount").val("");
+					$("#productDetail").summernote("code", "");
+					$("#fileResult").empty();
+				}else{
+					alert("상품 등록 실패");
+				}
+			},
+			error:function(){
+				alert("에러 발생");
+			}
+		});
+	
+	});
+	
+	
+	
+
+	//ajax 내가한것
+/* 	$("#ajaxAdd").on("click", function(){
 		
 		const formData = new FormData();
 	
@@ -141,9 +209,7 @@
 	    		}
 	    	}
 	    }
-	   	
-		
-		//formData.append('files', fileInput);
+	    
 		formData.append('productName',  $("#productName").val());
 		formData.append('productPrice', $("#productPrice").val());
 		formData.append('productCount', $("#productCount").val());
@@ -166,7 +232,7 @@
 													//뒤에 주석처리된것과 같은건데 summernote의 value를 가지고 올수 있는 코드
 			}, */
 			
-			success:function(data){
+			/* success:function(data){
 				if(data.trim() == '1'){
 					alert("상품 등록 완료");
 					//다시 호출해서 가지고오고
@@ -178,7 +244,7 @@
 					$("#productDetail").summernote("code", "");
 					$("#fileResult").empty();
 				}else{
-					alret("상품 등록 실패");
+					alert("상품 등록 실패");
 				}
 			},
 			error:function(){
@@ -186,8 +252,8 @@
 			}
 		});
 		
-	});
-	
+	}); */
+	 
 
 
 
