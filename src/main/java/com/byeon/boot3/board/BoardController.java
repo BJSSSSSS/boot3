@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,37 @@ public class BoardController {
 		return "board";
 	}
 	
+	//summerFileDelete
+	@GetMapping("summerFileDelete")
+	public ModelAndView setSummerFileDelete(String fileName) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		//System.out.println(fileName);
+		
+		boolean result = boardService.setSummerFileDelete(fileName);
+		//System.out.println(result);
+		mv.addObject("result", result);
+		mv.setViewName("common/result");
+		return mv;
+	}
+	
+	
+	//summerFileUpload
+	@PostMapping("summerFileUpload")
+	public ModelAndView setSummerFileUpload(MultipartFile files) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//System.out.println(files.getOriginalFilename());
+		//System.out.println(files.getSize());
+		
+		String fileName = boardService.setSummerFileUpload(files);
+		//System.out.println(fileName);
+		mv.addObject("result", fileName);
+		mv.setViewName("common/result");
+		
+		return mv;
+	}
+	
+	
 	//fileDown
 	@GetMapping("fileDown")
 	public ModelAndView getFileDown(BoardFilesVO boardFilesVO) throws Exception{
@@ -40,8 +72,6 @@ public class BoardController {
 		
 		return mv;
 	}
-	
-	
 	
 	
 	//list

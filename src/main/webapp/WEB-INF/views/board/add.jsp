@@ -73,11 +73,51 @@
 <script type="text/javascript">
 
 	//summernote
+	//이미지 업로드 추가
 	$('#contents').summernote({
 		height: 300,                 
-		minHeight: null,            
-		maxHeight: null,            
-		focus: true
+		placeholder: '내용을 입력하세요',
+		callbacks: {
+			onImageUpload: function(files){//onImageUpload 시작
+				//files upload한 이미지 파일객체	
+				let formData = new FormData();
+				formData.append("files", files[0]);
+				
+				// /board/summerFileUpload
+				$.ajax({
+					type: "POST",
+					url: "./summerFileUpload",
+					processData: false,
+				    contentType: false,
+					data:formData,
+					
+					success:function(data){
+						//console.log(data.trim());
+						$('#contents').summernote('editor.insertImage', data.trim());
+					}
+
+				});
+				
+			},//onImageUpload 끝
+			
+			onMediaDelete:function(files){//onMediaDelete 시작
+				let fileName = $(files[0]).attr("src");//<img src="">
+				console.log(fileName);
+				$.ajax({
+					type:"GET",
+					url:"./summerFileDelete",
+					data:{
+						fileName: fileName
+					},
+					
+					success:function(data){
+						console.log(data.trim());
+					}
+					
+				});
+			}//onMediaDelete 끝
+			
+		}
 	});
 
 	//강사
