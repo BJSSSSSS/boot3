@@ -18,7 +18,7 @@ class MemberMapperTest {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId("id1");
 		memberVO.setPw("pw1");
-		memberVO = memberMapper.login(memberVO);
+		memberVO = memberMapper.getLogin(memberVO);
 		assertNotNull(memberVO);
 	}
 	

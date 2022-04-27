@@ -13,6 +13,12 @@
   		<typeAlias type="com.byeon.boot3.product.ProductVO" alias="ProductVO"/>
   		<typeAlias type="com.byeon.boot3.product.ProductFilesVO" alias="ProductFilesVO"/>
   		<typeAlias type="com.byeon.boot3.util.Pager" alias="Pager"/>
+  		
+  		<typeAlias type="com.byeon.boot3.member.RoleVO" alias="RoleVO"/>
+
+  		<typeAlias type="java.util.Map" alias="Map"/>
+  		<typeAlias type="java.util.List" alias="List"/>
+  		
   	</typeAliases>
   
   </configuration>

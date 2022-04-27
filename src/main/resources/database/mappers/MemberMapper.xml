@@ -23,10 +23,54 @@
     		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone})
     	</insert>
     	
-    	<select id="login" parameterType="MemberVO" resultType="MemberVO">
-    		SELECT ID, NAME FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+    	<!-- 내꺼 시작-->
+    	<!-- <select id="getLogin" parameterType="MemberVO" resultMap="loginResult">
+    		SELECT M.ID, M.NAME, R.ROLENAME
+    		FROM MEMBER M
+    			INNER JOIN
+    			(SELECT * 
+				FROM
+					ROLE R
+						INNER JOIN
+					MEMBERROLE MR
+				USING(ROLEID)) R
+				USING(ID)
+    		WHERE ID = #{id} AND PW = #{pw}
     	</select>
     	
+    	<resultMap type="MemberVO" id="loginResult">
+    		<id column="id" property="id"/>
+    		<result column="name" property="name"/>
+    		<collection property="roleVOs" javaType="java.util.List" ofType="RoleVO">
+				<id column="roleId" property="roleId"/>
+				<result column="roleName" property="roleName"/>
+			</collection>
+    	</resultMap> -->
+    	<!-- 내꺼 끝 -->
+    	
+    	<!-- 강사꺼 시작-->
+    	<select id="getLogin" parameterType="MemberVO" resultMap="loginResult">
+	    	SELECT ID, M.NAME, R.ROLENAME
+			FROM 
+				MEMBER M
+				INNER JOIN
+				MEMBERROLE MR
+				USING(ID)
+				INNER JOIN
+				ROLE R
+				USING(ROLEID)
+			WHERE ID=#{id} and M.PW=#{pw}
+		</select>
+		
+    	<resultMap type="MemberVO" id="loginResult">
+    		<id column="ID" property="id"/>
+    		<result column="NAME" property="name"/>
+    		<collection property="roleVOs" javaType="List" ofType="RoleVO">
+				<result column="ROLENAME" property="roleName"/>
+			</collection>
+    	</resultMap>
+    	<!-- 강사꺼 끝 -->
+ 
     	<select id="myPage" parameterType="MemberVO" resultMap="myPageResult">
     		SELECT M.ID, M.NAME, M.EMAIL, M.PHONE, F.* 
     		FROM MEMBER M
@@ -59,7 +103,13 @@
     		DELETE FROM MEMBER WHERE ID = #{id}
     	</delete>
     	
-
+		
+		<!-- memberRole -->
+		<insert id="setRoleAdd" parameterType="Map">
+			INSERT INTO MEMBERROLE(ID, ROLEID)
+			VALUES(#{id}, (SELECT ROLEID FROM ROLE WHERE ROLENAME = #{roleName}))
+			<!-- MEMBERROLE(ID, ROLEID) 여기서 ROLEID는 문자열로 받아오기 때문에 숫자를 받기위해 서브쿼리를 하나 더 써줌! -->
+		</insert>
 
     
     

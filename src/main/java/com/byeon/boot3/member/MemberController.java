@@ -53,7 +53,7 @@ public class MemberController {
 	@PostMapping("login")
 	public ModelAndView login(MemberVO memberVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		memberVO = memberService.login(memberVO);
+		memberVO = memberService.getLogin(memberVO);
 		mv.setViewName("member/login");
 		
 		if(memberVO!=null) {
@@ -107,7 +107,7 @@ public class MemberController {
 		int result = memberService.setUpdate(memberVO);
 		
 		//수정후에 session으로 다시 넣어줌
-		memberVO = memberService.login(memberVO);
+		memberVO = memberService.getLogin(memberVO);
 		
 		if(memberVO!=null) {
 			session.setAttribute("member", memberVO);

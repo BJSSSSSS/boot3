@@ -44,6 +44,14 @@
 		</div>
   	</div>
   	
+  	<div class="container">
+  		<c:if test="${not empty member}">
+	  		<c:forEach items="${member.roleVOs}" var="member">
+	  			<h6>${member.roleName}</h6>
+	  		</c:forEach>
+  		</c:if>
+  	</div>
+  	
 <!-- 예제 -->
 <!-- <div class="container">
 	<input type="text" id="d1">
