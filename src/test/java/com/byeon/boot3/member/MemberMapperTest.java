@@ -40,7 +40,7 @@ class MemberMapperTest {
 		memberVO.setName("n2");
 		memberVO.setEmail("e2");
 		memberVO.setPhone("p2");
-		int result = memberMapper.join(memberVO);
+		int result = memberMapper.setJoin(memberVO);
 		assertEquals(1, result);
 	}
 	
