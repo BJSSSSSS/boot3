@@ -17,9 +17,16 @@ public class MemberService {
 	private FileManager fileManager;
 	
 	//회원가입
-	public int join(MemberVO memberVO, MultipartFile photo) throws Exception{
+	public int setJoin(MemberVO memberVO, MultipartFile photo) throws Exception{
 		
-		int result = memberMapper.join(memberVO);
+		int result = memberMapper.setJoin(memberVO);
+		
+		//MEMBERROLE TABLE INSERT
+		
+		
+		
+		
+		
 		
 		if(!photo.isEmpty()) {
 		

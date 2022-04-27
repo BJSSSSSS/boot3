@@ -34,7 +34,7 @@ public class MemberController {
 		//System.out.println("photo : " + photo.getOriginalFilename());
 		ModelAndView mv = new ModelAndView();
 		
-		int result = memberService.join(memberVO, photo);
+		int result = memberService.setJoin(memberVO, photo);
 	
 		mv.setViewName("redirect:../");
 

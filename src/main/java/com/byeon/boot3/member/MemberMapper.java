@@ -21,7 +21,7 @@ public interface MemberMapper {
 	
 	//member
 	//insert : 회원가입
-	public int join(MemberVO memberVO) throws Exception;
+	public int setJoin(MemberVO memberVO) throws Exception;
 	
 	//detail : 로그인
 	public MemberVO login(MemberVO memberVO) throws Exception;

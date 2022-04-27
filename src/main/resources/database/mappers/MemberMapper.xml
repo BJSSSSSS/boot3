@@ -18,7 +18,7 @@
     
     
     	<!-- member -->
-    	<insert id="join" parameterType="MemberVO">
+    	<insert id="setJoin" parameterType="MemberVO">
     		INSERT INTO MEMBER(ID, PW, NAME, EMAIL, PHONE)
     		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone})
     	</insert>

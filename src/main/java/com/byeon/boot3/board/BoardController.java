@@ -42,13 +42,13 @@ public class BoardController {
 	
 	//summerFileUpload
 	@PostMapping("summerFileUpload")
-	public ModelAndView setSummerFileUpload(MultipartFile files) throws Exception{
+	public ModelAndView setSummerFileUpload(MultipartFile summerFiles) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//System.out.println(files.getOriginalFilename());
 		//System.out.println(files.getSize());
 		
-		String fileName = boardService.setSummerFileUpload(files);
+		String fileName = boardService.setSummerFileUpload(summerFiles);
 		//System.out.println(fileName);
 		mv.addObject("result", fileName);
 		mv.setViewName("common/result");

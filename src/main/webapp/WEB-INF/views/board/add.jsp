@@ -81,7 +81,7 @@
 			onImageUpload: function(files){//onImageUpload 시작
 				//files upload한 이미지 파일객체	
 				let formData = new FormData();
-				formData.append("files", files[0]);
+				formData.append("summerFiles", files[0]);
 				
 				// /board/summerFileUpload
 				$.ajax({
