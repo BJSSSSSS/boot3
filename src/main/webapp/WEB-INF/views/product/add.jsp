@@ -41,29 +41,51 @@
 	
 	<div class="row mt-4">
 		<form action="./add" method="post" enctype="multipart/form-data">
+		
 		  <div class="row mb-3">
 		    <label for="productName" class="col-sm-2 col-form-label">ProductName</label>
 		    <div class="col-sm-10">
 		      <input type="text" class="form-control" id="productName" name="productName">
 		    </div>
 		  </div>
+		  
 		  <div class="row mb-3">
 		    <label for="productPrice" class="col-sm-2 col-form-label">ProductPrice</label>
 		    <div class="col-sm-10">
 		      <input type="text" class="form-control" id="productPrice" name="productPrice">
 		    </div>
 		  </div>
+		  
 		  <div class="row mb-3">
 		    <label for="productCount" class="col-sm-2 col-form-label">ProductCount</label>
 		    <div class="col-sm-10">
 		      <input type="text" class="form-control" id="productCount" name="productCount">
 		    </div>
 		  </div>
+		  
 		  <div class="row mb-3">
 		    <label for="productDetail" class="col-sm-2 col-form-label">ProductDetail</label>
 		    <div class="col-sm-10">
 		      <textarea class="form-control" id="productDetail" name="productDetail"></textarea>
 		    </div>
+		  </div>
+		  
+		  <div class="row mb-3">
+		  	
+		  	<div class="form-check"><!-- ajax라서 작동안했던거임.. -->
+			  <input class="form-check-input sale" type="radio" value="1" name="sale" id="flexRadioDefault1">
+			  <label class="form-check-label" for="flexRadioDefault1">
+			   	판매
+			  </label>
+			</div>
+			
+			<div class="form-check">															   <!-- checked 넣기 -->
+			  <input class="form-check-input sale" type="radio" value="0" name="sale" id="flexRadioDefault2" checked>
+			  <label class="form-check-label" for="flexRadioDefault2">
+			    판매중지
+			  </label>
+			</div>
+		  	
 		  </div>
 		  
 		  
@@ -90,8 +112,8 @@
 	let pn = 1;
 	
 	$("#list").on("click", ".pager", function(){
-		//console.log($(this).attr("data-num"));
-		let checkPn = $(this).attr("data-num");
+		//console.log($(this).attr("data-pn"));
+		let checkPn = $(this).attr("data-pn");
 		if(checkPn > 0){
 			pn = checkPn
 			getList();	
@@ -134,6 +156,13 @@
 		let productPrice = $("#productPrice").val();
 		let productCount = $("#productCount").val();
 		let productDetail = $("#productDetail").summernote("code");
+		let sale = 0;
+		$(".sale").each(function(idx, item){
+			if($(item).prop("checked")){
+				sale = $(item).val();
+			}
+		})
+		
 		
 		$(".files").each(function(idx, item) {
 			if(item.files.length > 0){				//length가 있는것들, file이 들어온것들 선택
@@ -152,6 +181,7 @@
 		formData.append('productPrice', productPrice);
 		formData.append('productCount', productCount);
 		formData.append('productDetail', productDetail);
+		formData.append('sale', sale);
 		
 		$.ajax({
 			type: "POST",

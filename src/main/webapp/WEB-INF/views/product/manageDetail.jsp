@@ -13,19 +13,18 @@
 </head>
 <body>
 <c:import url="../temp/header.jsp"></c:import>
-	<!-- 상세페이지 할때 bootstrap에서 card 써보는것도 괜찮을듯 -->
 	<div class="container">
 		<h1>Detail Page</h1>
 		
 		<div class="row">
 			<div class="card">
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item">${vo.title}</li>
-					<li class="list-group-item">${vo.writer}</li>
+					<li class="list-group-item">${vo.productName}</li>
+					<li class="list-group-item">${vo.productPrice}</li>
 				</ul>
 			
 				<div class="card-body">
-					${vo.contents}
+					${vo.productDetail}
 				</div>
 				
 				<hr class="my-6">
@@ -46,10 +45,10 @@
 	
 	<div class="container my-4">
 		<div class="col-2 d-flex">
-			<%-- <c:if test="${member.id eq vo.writer}"> --%>
-				<a href="./update?num=${vo.num}" role="button" class="btn btn-success mx-1">UPDATE</a>	
-				<a href="./delete?num=${vo.num}" role="button" class="btn btn-danger mx-1">DELETE</a>
-			<%-- </c:if> --%>
+			
+			<a href="./update?productNum=${vo.productNum}" role="button" class="btn btn-success mx-1">UPDATE</a>	
+			<a href="./delete?productNum=${vo.productNum}" role="button" class="btn btn-danger mx-1">DELETE</a>
+			
 			<a href="./list" role="button" class="btn btn-dark mx-1">List</a>
 		</div>
 	</div>

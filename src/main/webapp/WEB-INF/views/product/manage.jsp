@@ -15,8 +15,32 @@
 <!-- header -->
 <c:import url="../temp/header.jsp"></c:import>
 	
-	<h1>Product Manage Page</h1>
+	<div class="container">
 	
+		<div class="row">
+			<!-- 이렇게도 가능하다 코드의 재활용 -->
+			<c:import url="../common/productList.jsp"></c:import>
+			<form action="./manage" id="frm">
+				<input type="hidden" name="pn" id="pn" value="${pager.pn}">
+			</form>
+		</div>
+		<div class="col-1">
+			<a href="./add" type="button" class="btn btn-outline-primary">WRITE</a>
+		</div>
+
+	</div>
+
 <c:import url="../temp/header_script.jsp"></c:import>	
+
+<script type="text/javascript">
+	
+	$(".pager").click(function(){
+		let pn = $(this).attr("data-pn");
+		$("#pn").val(pn);
+		$("#frm").submit();
+	})
+
+</script>
+
 </body>
 </html>

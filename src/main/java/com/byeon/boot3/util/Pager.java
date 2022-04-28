@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class Pager {
+	//멤버변수로 id 추가 하거나 상속받는 클래스 하나 더 생성(참고용으로 생성 해놓음)
+	private String id;
 
 	//DB에서 몇개씩 조회(파라미터의 값 가능)
 	private Integer perPage;

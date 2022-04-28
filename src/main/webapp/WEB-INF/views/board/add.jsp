@@ -44,7 +44,7 @@
 		  <div class="row mb-3">
 		    <label for="writer" class="col-sm-2 col-form-label">Writer</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="writer" name="writer">
+		      <input type="text" class="form-control" id="writer" name="writer" value="${member.id}" readonly>
 		    </div>
 		  </div>
 		  <div class="row mb-3">

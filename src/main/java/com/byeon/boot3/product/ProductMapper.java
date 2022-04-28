@@ -1,6 +1,7 @@
 package com.byeon.boot3.product;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -8,8 +9,10 @@ import com.byeon.boot3.util.Pager;
 
 @Mapper
 public interface ProductMapper {
-	
 
+	//detail
+	public ProductVO getDetail(ProductVO productVO) throws Exception;
+	
 	//insert
 	public int setAdd(ProductVO productVO) throws Exception; 
 	
@@ -28,6 +31,6 @@ public interface ProductMapper {
 	//fileList(지우려고)
 	public List<ProductFilesVO> getFileList(ProductVO productVO) throws Exception;
 	
-	
+
 
 }

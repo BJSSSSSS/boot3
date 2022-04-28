@@ -7,7 +7,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.byeon.boot3.interceptor.AdminInterceptor;
 import com.byeon.boot3.interceptor.BoardInterceptor;
+import com.byeon.boot3.interceptor.DeleteCheckInterceptor;
 import com.byeon.boot3.interceptor.SellerInterceptor;
+import com.byeon.boot3.interceptor.WriterCheckInterceptor;
 
 @Configuration //설정 파일임을 명시
 public class InterceptorConfig implements WebMvcConfigurer {
@@ -20,6 +22,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private BoardInterceptor boardInterceptor;
+	
+	@Autowired
+	private WriterCheckInterceptor writerCheckInterceptor;
+	
+	//@Autowired
+	//private DeleteCheckInterceptor deleteCheckInterceptor;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -43,6 +51,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
 				.addPathPatterns("/board/*")
 				.excludePathPatterns("/board/list");
 		
+		registry.addInterceptor(writerCheckInterceptor)
+				.addPathPatterns("/board/update")
+				.addPathPatterns("/board/delete");
+				
+//		registry.addInterceptor(deleteCheckInterceptor)
+//				.addPathPatterns("/board/delete");
 		
 		//WebMvcConfigurer.super.addInterceptors(registry); 요건 자동생성인데 안해도 됨
 	}

@@ -1,6 +1,8 @@
 package com.byeon.boot3.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,13 @@ public class ProductService {
 	
 	@Autowired
 	private FileManager fileManager;
+	
+
+	//detail
+	public ProductVO getDetail(ProductVO productVO) throws Exception{
+		return productMapper.getDetail(productVO);
+	}
+	
 	
 	//list
 	public List<ProductVO> getList(Pager pager) throws Exception{

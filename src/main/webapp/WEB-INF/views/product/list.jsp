@@ -29,7 +29,7 @@
 					<img src="../resources/upload/product/${vo.filesVOs[0].fileName}" class="card-img-top" alt="...">
 			  		<div class="card-body">
 			    		<h6 class="card-title">챔피언 이름</h6>
-			    		<p class="card-text">${vo.productName}</p>
+			    		<p class="card-text"><a href="./detail?productNum=${vo.productNum}">${vo.productName}</a></p>
 			  		</div>
 			  		<ul class="list-group list-group-flush">
 					    <li class="list-group-item">챔피언 가격 : ${vo.productPrice}</li>

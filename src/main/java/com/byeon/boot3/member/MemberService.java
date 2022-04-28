@@ -26,6 +26,11 @@ public class MemberService {
 	//properties 파일의 member.role.member 속성값 반환
 	@Value("${member.role.member}")
 	private String memberRole;
+	//여기서 판매자의 회원가입을 넣어줄때는 controller에서 판매자용 회원가입 만들어주고
+	//properties 파일의 member.role.member와 member.role.seller을 가지고오고
+	//setJoinSeller등 메서드를 하나 더 만들어 준뒤 result를 두번 해줘야할듯(일단 실험해보면 가능)
+//	@Value("${member.role.seller}")
+//	private String sellerRole;
 	
 	//회원가입
 	public int setJoin(MemberVO memberVO, MultipartFile photo) throws Exception{
@@ -38,8 +43,12 @@ public class MemberService {
 		map.put("id", memberVO.getId());
 		//여기서 roldName을 문자열로 받고 이후 mapper에서 서브쿼리로 숫자로 만들어줄것 밑에 값을 위에 value로 넣음
 		map.put("roleName", memberRole);
-		
+	
 		result = memberMapper.setRoleAdd(map);
+		
+		//밑에는 내가 해보는것 대충 이런식일듯? roleName 바뀐걸 한번 더 사용해줌 대신에 메서드를 다른걸 쓰는게 맞는듯 controller도!
+//		map.put("roleName", sellerRole);
+//		result = memberMapper.setRoleAdd(map);
 		
 		
 		if(!photo.isEmpty()) {

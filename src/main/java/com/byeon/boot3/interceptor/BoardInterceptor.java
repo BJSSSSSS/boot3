@@ -25,7 +25,7 @@ public class BoardInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+		System.out.println("Board Interceptor");
 		boolean check = false;
 		
 		HttpSession session = request.getSession();
@@ -41,8 +41,8 @@ public class BoardInterceptor implements HandlerInterceptor{
 		}
 
 		if(!check) {	
-			request.setAttribute("msg", "권한이 없습니다");
-			request.setAttribute("path", "../");
+			request.setAttribute("msg", "로그인 하세요");
+			request.setAttribute("path", "../member/login");
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/getResult.jsp");
 			view.forward(request, response); 
 		}
