@@ -26,8 +26,8 @@ public class BoardController {
 		return "board";
 	}
 	
-	//summerFileDelete
-	@GetMapping("summerFileDelete")
+	//이거 summernoteController 따로만들고, summernote.js 따로만들어서 처리 안하고 이건 그대로 놔둠 board/add.jsp 맨 밑 확인	//summerFileDelete
+//	@GetMapping("summerFileDelete")
 	public ModelAndView setSummerFileDelete(String fileName) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		//System.out.println(fileName);

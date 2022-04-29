@@ -74,6 +74,10 @@
 
 	//summernote
 	//이미지 업로드 추가
+	//이 부분 summernote.js에 넣어놓고 함수 호출해서 사용하는것으로 바꿨는데 이건(board/add.jsp)에는 확인용도로 놔둬놓음
+	//하게되면 위에 추가해줘야함 <script type="text/javascript" src="../js/summernote.js"> <script>
+	//밑에 첨부파일도 !
+	
 	$('#contents').summernote({
 		height: 300,                 
 		placeholder: '내용을 입력하세요',
@@ -82,7 +86,7 @@
 				//files upload한 이미지 파일객체	
 				let formData = new FormData();
 				formData.append("summerFiles", files[0]);
-				
+				console.log($(".note-image-input").val())
 				// /board/summerFileUpload
 				$.ajax({
 					type: "POST",
@@ -93,6 +97,10 @@
 					
 					success:function(data){
 						//console.log(data.trim());
+						//summernote 자체적으로 만들어주는 클래스라서 성공하면 자동적으로 이 클래스 선택해서 값을 지워주는것을 해줘야함
+						//첨부파일 안넣었을때 없애주는것
+						$(".note-image-input").val('');
+						
 						$('#contents').summernote('editor.insertImage', data.trim());
 					}
 

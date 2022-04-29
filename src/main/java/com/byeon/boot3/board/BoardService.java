@@ -21,6 +21,7 @@ public class BoardService {
 	@Autowired
 	public FileManager fileManager;
 	
+	//이거 summernoteController 따로만들고, summernote.js 따로만들어서 처리 안하고 이건 그대로 놔둠 board/add.jsp 맨 밑 확인
 	//summerFile에서 파일 삭제
 	public boolean setSummerFileDelete(String fileName) throws Exception{
 		

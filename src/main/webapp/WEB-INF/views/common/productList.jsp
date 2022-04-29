@@ -17,7 +17,7 @@
 			<c:forEach items="${list}" var="vo">
 				<tr>
 					<td>${vo.productNum}</td>
-					<td><a href="./detail?productNum=${vo.productNum}">${vo.productName}</a></td>
+					<td class="detail" data-num="${vo.productNum}">${vo.productName}</td>
 					<td>${vo.productPrice}</td>
 					<td>${vo.productCount}</td>
 					<!-- 3항연산자에 한글 가능 앞뒤로'' -->

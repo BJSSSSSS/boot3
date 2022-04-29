@@ -103,8 +103,14 @@
 
 
 
-
+<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
+<script type="text/javascript" src="../js/summernote.js"></script>
 <script type="text/javascript">
+
+	summernoteInit("productDetail", "");
+	
+	
+	
 	
 	
 	//add.jsp안에 paging 처리
@@ -290,17 +296,14 @@
 
 
 	//summernote
-	$('#productDetail').summernote({
-		height: 300,                 
-		minHeight: null,            
-		maxHeight: null,            
-		focus: true
-	});
+	/* $('#productDetail').summernote({
+		height: 300                 
+	}); */
 
 	//강사
-	let count = 0;
+	/* let count = 0; */
 
-	$("#fileAdd").on("click", function(){
+	/* $("#fileAdd").on("click", function(){
 		
 		//강사
 		if(count > 4){
@@ -314,7 +317,7 @@
 		result = result + '</div>';
 		
 		$("#fileResult").append(result);
-		count++;
+		count++; */
 		
 		//내가 해본것(지우는것 아직 미구현)
 		/* let r = '<div class="row mb-3">';
@@ -333,14 +336,14 @@
 			$("#fileResult").empty();
 		}); */
 		
-	});
+	//});
 	
-	$("#fileResult").on("click", ".del", function(){
+	/* $("#fileResult").on("click", ".del", function(){
 		//대상의 부모를 찾아 지움
 		$(this).parent().remove();
 		count--;
 			
-	});
+	}); */
 	
 	
 </script>

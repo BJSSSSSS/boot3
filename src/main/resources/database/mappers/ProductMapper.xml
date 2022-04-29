@@ -5,25 +5,34 @@
     
     <mapper namespace="com.byeon.boot3.product.ProductMapper">
     	
+    	<!-- product -->
+    	
+    	<!-- update -->
+    	<update id="setUpdate" parameterType="ProductVO">
+    		UPDATE PRODUCT 
+    		SET
+    			PRODUCTNAME = #{productName}, PRODUCTPRICE=#{productPrice},
+    			PRODUCTCOUNT=#{productCount}, PRODUCTDETAIL=#{productDetail},
+    			SALE=#{sale}
+    		WHERE PRODUCTNUM=#{productNum}
+    	</update>
+    	
     	
     	<!-- detail -->
     	<select id="getDetail" resultMap="fileAddResult" parameterType="ProductVO">
     		SELECT P.*, PF.* 
     		FROM
     			PRODUCT P
-    				INNER JOIN
+    				LEFT JOIN
     			PRODUCTFILES PF
     			USING(PRODUCTNUM)
     		WHERE PRODUCTNUM = #{productNum}
-   			<if test="id != null">
+   			<!-- <if test="id != null">
    				AND ID = #{id}
-			</if>
+			</if> -->
     	</select>
     	
     	
-    
-
-    	<!-- product -->
     	<select id="getList" resultMap="fileAddResult" parameterType="Pager">
     		SELECT P.*, PF.* FROM
     			(
@@ -122,13 +131,7 @@
     		INSERT INTO PRODUCT(PRODUCTNUM, PRODUCTNAME, PRODUCTPRICE, PRODUCTCOUNT, PRODUCTDETAIL, ID, SALE)
     		VALUES(#{productNum}, #{productName}, #{productPrice}, #{productCount}, #{productDetail}, #{id}, #{sale})
     	</insert>
-    	
-    	<insert id="setFileAdd" parameterType="ProductFilesVO">
-    		INSERT INTO PRODUCTFILES
-    		VALUES(NULL, #{productNum}, #{fileName}, #{oriName})
-    	</insert>
-    
-    
+
     	<delete id="setDelete" parameterType="ProductVO">
     		DELETE FROM PRODUCT WHERE PRODUCTNUM = #{productNum}
     	</delete>
@@ -136,10 +139,23 @@
     	
     	
     	<!-- productFile -->
+    	
+    	<insert id="setFileAdd" parameterType="ProductFilesVO">
+    		INSERT INTO PRODUCTFILES
+    		VALUES(NULL, #{productNum}, #{fileName}, #{oriName})
+    	</insert>
+    	
     	<select id="getFileList" parameterType="ProductVO" resultType="ProductFilesVO">
     		SELECT * FROM PRODUCTFILES WHERE PRODUCTNUM = #{productNum}
     	</select>
+    	
+    	<select id="getFileDetail" parameterType="ProductFilesVO" resultType="ProductFilesVO">
+    		SELECT * FROM PRODUCTFILES WHERE FILENUM = #{fileNum}
+    	</select>
     
+    	<delete id="setFileDelete" parameterType="ProductFilesVO">
+    		DELETE FROM PRODUCTFILES WHERE FILENUM = #{fileNum}
+    	</delete>
     
     
     </mapper>

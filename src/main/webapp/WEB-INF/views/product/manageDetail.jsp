@@ -13,49 +13,19 @@
 </head>
 <body>
 <c:import url="../temp/header.jsp"></c:import>
-	<div class="container">
-		<h1>Detail Page</h1>
-		
-		<div class="row">
-			<div class="card">
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">${vo.productName}</li>
-					<li class="list-group-item">${vo.productPrice}</li>
-				</ul>
-			
-				<div class="card-body">
-					${vo.productDetail}
-				</div>
-				
-				<hr class="my-6">
-				<h6>첨부파일</h6>
-				
-				<ul class="list-group list-group-flush">
-					<c:forEach items="${vo.filesVOs}" var="f">
-						<li class="list-group-item">
-							<a href="./fileDown?fileNum=${f.fileNum}">${f.oriName}</a>
-						</li>
-					</c:forEach>
-				</ul>
-			
-			</div>
-		</div>
+<c:import url="./temp_detail.jsp"></c:import>
 
-	</div>
 	
 	<div class="container my-4">
 		<div class="col-2 d-flex">
-			
-			<a href="./update?productNum=${vo.productNum}" role="button" class="btn btn-success mx-1">UPDATE</a>	
-			<a href="./delete?productNum=${vo.productNum}" role="button" class="btn btn-danger mx-1">DELETE</a>
-			
-			<a href="./list" role="button" class="btn btn-dark mx-1">List</a>
+			<a href="./update?productNum=${vo.productNum}" role="button" class="btn btn-success mx-1">UPDATE</a>
+			<!-- 삭제는 하지 않고(삭제하면 구매한 사람들 제품이 이상해지니까, 제품 판매중지를 하면 update로 만들어줄것 -->	
 		</div>
 	</div>
 	
 	
 	
-	
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<c:import url="../temp/header_script.jsp"></c:import>	
+
 </body>
 </html>

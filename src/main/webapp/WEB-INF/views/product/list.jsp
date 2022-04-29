@@ -9,6 +9,11 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<style type="text/css">
+	.detail{
+		cursor: pointer;
+	}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -24,12 +29,14 @@
 	
 	<div class="row row-cols-2 row-cols-md-4 mb-4 text-center">
 		<c:forEach items="${list}" var="vo" varStatus="i">
-			<div class="col">
+			<!-- 전체를 a태그로 감싸봄, card 자체를 클릭하면 넘어가게 만드려고 -->
+			<%-- <a href="./detail?productNum=${vo.productNum}"><!-- a태그는 inline 그래서 다른거쓰자 --> --%>
+			<div class="col detail" data-num="${vo.productNum}"><!-- location을 쓰려고 class, data-num 부여 -->
 				<div class="card mb-4 rounded-3 shadow-sm" style="width: 18rem;">
 					<img src="../resources/upload/product/${vo.filesVOs[0].fileName}" class="card-img-top" alt="...">
 			  		<div class="card-body">
 			    		<h6 class="card-title">챔피언 이름</h6>
-			    		<p class="card-text"><a href="./detail?productNum=${vo.productNum}">${vo.productName}</a></p>
+			    		<p class="card-text">${vo.productName}</p>
 			  		</div>
 			  		<ul class="list-group list-group-flush">
 					    <li class="list-group-item">챔피언 가격 : ${vo.productPrice}</li>
@@ -39,6 +46,7 @@
 		  			</div>
 				</div>
 			</div>	
+			<!-- </a> -->
 		</c:forEach>
 	</div>
 	
@@ -99,5 +107,13 @@
 
 
 <c:import url="../temp/header_script.jsp"></c:import>
+
+<script type="text/javascript">
+	$(".detail").click(function(){
+		let num = $(this).attr("data-num");
+		location.href="./detail?productNum="+num;
+	})
+</script>
+
 </body>
 </html>

@@ -29,6 +29,24 @@ public class ProductController {
 		return "product";
 	}
 	
+	//fileDelete(ajax)
+	@PostMapping("fileDelete")
+	public ModelAndView setFileDelete(ProductFilesVO productFilesVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//System.out.println(productFilesVO.getFileNum());
+		
+		int result = productService.setFileDelete(productFilesVO);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/result");
+		
+		return mv;
+	}
+	
+	
+	
+	
 	@GetMapping("detail")
 	public ModelAndView getDetail(ProductVO productVO) throws Exception{
 		//parameter는 productNum
@@ -49,8 +67,8 @@ public class ProductController {
 		//판매자가 보는 페이지
 		ModelAndView mv = new ModelAndView();
 		
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		productVO.setId(memberVO.getId());
+//		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+//		productVO.setId(memberVO.getId());
 		productVO = productService.getDetail(productVO);
 		
 		mv.addObject("vo", productVO);
@@ -142,8 +160,36 @@ public class ProductController {
 		return mv;
 	}
 	
+	//update form
+	@GetMapping("update")
+	public ModelAndView setUpdate(ProductVO productVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		productVO = productService.getDetail(productVO);
+		
+		mv.addObject("vo", productVO);
+		mv.setViewName("product/update");
+		
+		return mv;
+	}
 	
+	//update DB
+	@PostMapping("update")
+	public ModelAndView setUpdate(ProductVO productVO, MultipartFile [] files) throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		int result = productService.setUpdate(productVO, files);
+		
+		if(result>0) {
+			mv.setViewName("redirect:./manage");
+		}else {
+			mv.addObject("msg","Update Fail");
+			mv.addObject("path","./manageDetail?productNum="+productVO.getProductNum());
+			mv.setViewName("common/getResult");
+		}
+		return mv;
+	}
 	
+
 	//delete
 	@GetMapping("delete")
 	public ModelAndView setDelete(ProductVO productVO) throws Exception{
