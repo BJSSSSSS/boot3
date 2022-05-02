@@ -111,6 +111,13 @@
 			<!-- MEMBERROLE(ID, ROLEID) 여기서 ROLEID는 문자열로 받아오기 때문에 숫자를 받기위해 서브쿼리를 하나 더 써줌! -->
 		</insert>
 
+
+		<!-- find id -->
+		<select id="getFindId" parameterType="MemberVO" resultType="MemberVO">
+			SELECT ID FROM MEMBER WHERE EMAIL = #{email}
+			<!-- REPLACE 함수써서 ID 오롯히 가지고 오지말고 ad*** 등으로 갖고오게 만들어주기 -->
+			<!-- 비밀번호 찾기 할때 자바에서 메일전송, 임시비밀번호 발급, 비밀번호 이메일로 보내주기 등 해보기 -->
+		</select>
     
     
     </mapper>

@@ -24,6 +24,25 @@ public class MemberController {
 		return "member";
 	}
 	
+	//find id form
+	@GetMapping("findId")	
+	public void getFindId() throws Exception{}
+	
+	
+	//find id DB
+	@PostMapping("findId")	
+	public ModelAndView getFindId(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		memberVO = memberService.getFindId(memberVO);
+		
+		//System.out.println(memberVO.getId());
+		mv.addObject("idResult", memberVO);
+		mv.setViewName("member/findIdResult");
+		return mv;
+	}
+	
+	
 	//join form 이동
 	@GetMapping("join")
 	public void join() throws Exception{}
@@ -43,8 +62,9 @@ public class MemberController {
 	
 	//login form 이동
 	@GetMapping("login")
-	public ModelAndView login() throws Exception{
+	public ModelAndView login(@ModelAttribute MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		//mv.addObject("vo", new MemberVO()); 이렇게 하거나 위에 @ModelAttribute에 넣기
 		mv.setViewName("member/login");
 		return mv;
 	}

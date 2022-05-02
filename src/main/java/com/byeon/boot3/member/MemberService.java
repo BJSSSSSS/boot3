@@ -92,6 +92,10 @@ public class MemberService {
 		return result;
 	}
 	
+	//이메일로 회원정보 찾기
+	public MemberVO getFindId(MemberVO memberVO) throws Exception{
+		return memberMapper.getFindId(memberVO);
+	}
 	
 
 }

@@ -46,4 +46,8 @@ public interface MemberMapper {
 	public int setRoleAdd(Map<String, String> map) throws Exception;
 	
 
+	//find id
+	public MemberVO getFindId(MemberVO memberVO) throws Exception;
+	
+	
 }

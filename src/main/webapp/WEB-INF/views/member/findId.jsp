@@ -16,41 +16,26 @@
 	<div class="container mt-4">
 	<div class="row mt-4">
 		<div class="alert alert-light" role="alert">
-	  		<h4 style="text-transform: uppercase;">${board} Login</h4>
+	  		<h4 style="text-transform: uppercase;">${board} Finde ID</h4>
 		</div>
 	</div>
 		
 		<div class="row mt-4">
-		<form action="./login" method="post">
+		<form action="./findId" method="post">
 			<div class="row mb-3">
-		    	<label for="id" class="col-sm-2 col-form-label">ID</label>
+		    	<label for="email" class="col-sm-2 col-form-label">Email</label>
 		    	<div class="col-sm-10">
-		      		<input type="text" class="form-control" id="id" name="id">
+		      		<input type="text" class="form-control" id="email" name="email">
 		    	</div>
 		  	</div>
-		  	<div class="row mb-3">
-		    	<label for="pw" class="col-sm-2 col-form-label">PW</label>
-		    	<div class="col-sm-10">
-		      		<input type="password" class="form-control" id="pw" name="pw">
-		    	</div>
-		  	</div>
-		
-			<button type="submit" class="btn btn-primary">Login</button>
-			
-			<div class="row">
-				<button type="button" id="find"class="btn btn-danger">ID찾기</button>
-			</div>
-			
+
+			<button type="submit" class="btn btn-primary">ID 찾기</button>
+
 		</form>
 		</div>
 	</div>
 	
 	
 <c:import url="../temp/header_script.jsp"></c:import>
-<script type="text/javascript">
-	$("#find").click(function(){
-		location.href="./findId";
-	})
-</script>
 </body>
 </html>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import com.byeon.boot3.interceptor.AdminInterceptor;
 import com.byeon.boot3.interceptor.BoardInterceptor;
@@ -25,6 +26,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private WriterCheckInterceptor writerCheckInterceptor;
+	
+	@Autowired
+	private LocaleChangeInterceptor localeChangeInterceptor;
 	
 	//@Autowired
 	//private DeleteCheckInterceptor deleteCheckInterceptor;
@@ -57,6 +61,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
 				
 //		registry.addInterceptor(deleteCheckInterceptor)
 //				.addPathPatterns("/board/delete");
+		
+		//locale
+		registry.addInterceptor(localeChangeInterceptor)
+				.addPathPatterns("/**");
+		
+		
 		
 		//WebMvcConfigurer.super.addInterceptors(registry); 요건 자동생성인데 안해도 됨
 	}
