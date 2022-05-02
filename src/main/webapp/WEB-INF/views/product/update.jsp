@@ -111,7 +111,7 @@
 <script type="text/javascript" src="../js/summernote.js"></script>
 <script type="text/javascript">
 
-	summernoteInit("productDetail", "${vo.productDetail}");//매개변수 2개넣는거고, 여기서 EL문으로 받아와서 summernote.js에서 받아주는 방식 ㅋㅋㅋ 개쩐다
+	summernoteInit("productDetail", "${vo.productDetail}");//매개변수 2개넣는거고, 여기서 EL문으로 받아와서 summernote.js에서 받아주는 방식
 	fileAddInit(${vo.filesVOs.size()}); //size함수 호출로 count 값 가져온다 내가 했던것과 비교
 	fileDeleteInit();
 	

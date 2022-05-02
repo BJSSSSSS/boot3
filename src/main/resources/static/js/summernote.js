@@ -59,7 +59,8 @@ function summernoteInit(selector, code){//selector에 id를 보낼것임
 	});
 
 	
-	$('#productDetail').summernote('code', code);
+	$('#'+selector).summernote('code', code);
+	//$('#'+selector).summernote('editor.insertImage', code);
 	
 }
  
