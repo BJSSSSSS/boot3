@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,50 +41,72 @@
 	
 	
 	<div class="row mt-4">
-		<form action="./add" method="post" enctype="multipart/form-data">
+		<%-- <form action="./add" method="post" enctype="multipart/form-data"> --%>
+		<form:form modelAttribute="productVO" method="post" enctype="multipart/form-data">
 		
 		  <div class="row mb-3">
 		    <label for="productName" class="col-sm-2 col-form-label">ProductName</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="productName" name="productName">
+		      <!-- <input type="text" class="form-control" id="productName" name="productName"> -->
+		      <form:input path="productName" cssClass="form-control" id="productName"/>
+		      <div>
+		      	<form:errors path="productName" cssStyle="color:red;"></form:errors>
+		      </div>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="productPrice" class="col-sm-2 col-form-label">ProductPrice</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="productPrice" name="productPrice">
+		      <!-- <input type="text" class="form-control" id="productPrice" name="productPrice"> -->
+		      <form:input path="productPrice" cssClass="form-control" id="productPrice"/>
+		      <div>
+		      	<form:errors path="productPrice" cssStyle="color:red;"></form:errors>
+		      </div>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="productCount" class="col-sm-2 col-form-label">ProductCount</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="productCount" name="productCount">
+		      <!-- <input type="text" class="form-control" id="productCount" name="productCount"> -->
+		      <form:input path="productCount" cssClass="form-control" id="productCount"/>
+		      <div>
+		      	<form:errors path="productCount" cssStyle="color:red;"></form:errors>
+		      </div>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="productDetail" class="col-sm-2 col-form-label">ProductDetail</label>
 		    <div class="col-sm-10">
-		      <textarea class="form-control" id="productDetail" name="productDetail"></textarea>
+		      <!-- <textarea class="form-control" id="productDetail" name="productDetail"></textarea> -->
+		      <form:textarea path="productDetail" cssClass="form-control" id="productDetail"/>
+		      <div>
+		      	<form:errors path="productDetail" cssStyle="color:red;"></form:errors>
+		      </div>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		  	
 		  	<div class="form-check"><!-- ajax라서 작동안했던거임.. -->
-			  <input class="form-check-input sale" type="radio" value="1" name="sale" id="flexRadioDefault1">
+			  <!-- <input class="form-check-input sale" type="radio" value="1" name="sale" id="flexRadioDefault1"> -->
+		  	  <form:radiobutton path="sale" cssClass="form-check-input sale" value="1" id="flexRadioDefault1"/>
 			  <label class="form-check-label" for="flexRadioDefault1">
 			   	판매
 			  </label>
 			</div>
 			
 			<div class="form-check">															   <!-- checked 넣기 -->
-			  <input class="form-check-input sale" type="radio" value="0" name="sale" id="flexRadioDefault2" checked>
+			  <!-- <input class="form-check-input sale" type="radio" value="0" name="sale" id="flexRadioDefault2" checked> -->
+			  <form:radiobutton path="sale" cssClass="form-check-input sale" value="0" id="flexRadioDefault2"/>
 			  <label class="form-check-label" for="flexRadioDefault2">
 			    판매중지
 			  </label>
+			  <div>
+		      	<form:errors path="sale" cssStyle="color:red;"></form:errors>
+		      </div>
 			</div>
 		  	
 		  </div>
@@ -92,12 +115,12 @@
 		  <button id="fileAdd" type="button" class="btn btn-danger d-block my-4">FileAdd</button>
 		  
 		  <div id="fileResult"></div>
-
-		  <button id="ajaxAdd" type="button" class="btn btn-primary my-4">Add</button>
-		</form>
+			<!-- 동기식으로 바꿔놓음 -->
+		  <button id="ajaxAdd2" type="submit" class="btn btn-primary my-4">Add</button>
+		</form:form>
+		<%-- </form> --%>
 	
 	</div>
-	
 	
 </div>	
 

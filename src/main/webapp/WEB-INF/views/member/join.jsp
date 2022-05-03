@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,43 +24,68 @@
 	
 	
 	<div class="row mt-4">
-		<form action="./join" method="post" enctype="multipart/form-data">
+		<%-- <form action="./join" method="post" enctype="multipart/form-data"> --%>
+		<form:form modelAttribute="memberVO" method="post" enctype="multipart/form-data">
 		  <div class="row mb-3">
 		    <label for="id" class="col-sm-2 col-form-label">ID</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="id" name="id">
+		      <!-- <input type="text" class="form-control" id="id" name="id"> -->
+		      <form:input path="id" cssClass="form-control" id="id"/>
+		      <div>
+			      <form:errors path="id" cssStyle="color:red;"></form:errors>
+			  </div>
 		    </div>
 		  </div>
 		  <div class="row mb-3">
 		    <label for="pw" class="col-sm-2 col-form-label">PW</label>
 		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="pw" name="pw">
+		      <!-- <input type="password" class="form-control" id="pw" name="pw"> -->
+		      <form:password path="pw" cssClass="form-control" id="pw"/>
+    		  <div>
+			      <form:errors path="pw" cssStyle="color:red;"></form:errors>
+			  </div>
 		    </div>
 		  </div>
 		  <div class="row mb-3">
 		    <label for="pwC" class="col-sm-2 col-form-label">PWCHECK</label>
 		    <div class="col-sm-10">
-		      <input type="password" class="form-control" id="pwC" name="pwC">
+		      <!-- <input type="password" class="form-control" id="pwC" name="pwC"> -->
+		      <form:password path="pwC" cssClass="form-control" id="pwC"/>
+		      <div>
+			      <form:errors path="pwC" cssStyle="color:red;"></form:errors>
+			  </div>
 		    </div>
-		  </div>
+		  </div> 
 		  <div class="row mb-3">
 		     <label for="name" class="col-sm-2 col-form-label">NAME</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="name" name="name">
+		      <!-- <input type="text" class="form-control" id="name" name="name"> -->
+		      <form:input path="name" cssClass="form-control" id="name"/>
+		      <div>
+			      <form:errors path="name" cssStyle="color:red;"></form:errors>
+			  </div>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		     <label for="email" class="col-sm-2 col-form-label">EMAIL</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="email" name="email">
+		      <!-- <input type="text" class="form-control" id="email" name="email"> -->
+		      <form:input path="email" cssClass="form-control" id="email"/>
+		      <div>
+			      <form:errors path="email" cssStyle="color:red;"></form:errors>
+			  </div>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		     <label for="phone" class="col-sm-2 col-form-label">PHONE</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="phone" name="phone">
+		      <!-- <input type="text" class="form-control" id="phone" name="phone"> -->
+		      <form:input path="phone" cssClass="form-control" id="phone"/>
+		      <div>
+			      <form:errors path="phone" cssStyle="color:red;"></form:errors>
+			  </div>
 		    </div>
 		  </div>
 		  
@@ -72,7 +98,9 @@
 		  
 		  
 		  <button type="submit" class="btn btn-primary">Join</button>
-		</form>
+		
+		</form:form>
+		<%-- </form> --%>
 	
 	</div>
 	

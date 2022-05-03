@@ -1,10 +1,12 @@
 package com.byeon.boot3.member;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,13 +47,29 @@ public class MemberController {
 	
 	//join form 이동
 	@GetMapping("join")
-	public void join() throws Exception{}
+	public ModelAndView join(@ModelAttribute MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/join");
+		return mv;
+	}
 	
 	//join DB
 	@PostMapping("join")
-	public ModelAndView join(MemberVO memberVO, MultipartFile photo) throws Exception{
+	public ModelAndView join(@Valid MemberVO memberVO, BindingResult bindingResult, MultipartFile photo) throws Exception{
 		//System.out.println("photo : " + photo.getOriginalFilename());
 		ModelAndView mv = new ModelAndView();
+		
+//		if(bindingResult.hasErrors()) {
+//			mv.setViewName("member/join");
+//			return mv;
+//		}
+		
+		//사용자 정의 검증 메서드 호출
+		if(memberService.memberError(memberVO, bindingResult)) {
+			mv.setViewName("member/join");
+			return mv;
+		}
+		
 		
 		int result = memberService.setJoin(memberVO, photo);
 	
@@ -70,9 +88,17 @@ public class MemberController {
 	}
 		
 	//login DB
-	@PostMapping("login")
-	public ModelAndView login(MemberVO memberVO, HttpSession session) throws Exception{
+	@PostMapping("login")									//순서 중요! 꼭 검증할 VO 바로 뒤에 선언
+	public ModelAndView login(@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session) throws Exception{
+		
 		ModelAndView mv = new ModelAndView();
+		
+//		if(bindingResult.hasErrors()) { //로그인할때 검증을 빼야 작동된다! 연습용이고 제대로는 join때
+//			mv.setViewName("member/login");
+//			return mv;
+//		}
+		
+		
 		memberVO = memberService.getLogin(memberVO);
 		mv.setViewName("member/login");
 		

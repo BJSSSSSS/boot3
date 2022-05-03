@@ -3,10 +3,12 @@ package com.byeon.boot3.product;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -117,13 +119,18 @@ public class ProductController {
 	
 	//add form 이동
 	@GetMapping("add")
-	public void setAdd() throws Exception{}
+	public void setAdd(@ModelAttribute ProductVO productVO) throws Exception{}
 	
 	
 	//add DB
 	@PostMapping("add")
-	public ModelAndView setAdd(ProductVO productVO, MultipartFile [] files, HttpSession session) throws Exception{
+	public ModelAndView setAdd(@Valid ProductVO productVO, BindingResult bindingResult, MultipartFile [] files, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("product/add");
+			return mv;
+		}
 		
 //		for(MultipartFile f: files) {
 //			System.out.println(f.getOriginalFilename());
