@@ -19,6 +19,8 @@
   		<typeAlias type="java.util.Map" alias="Map"/>
   		<typeAlias type="java.util.List" alias="List"/>
   		
+  		<typeAlias type="com.byeon.boot3.cart.CartVO" alias="CartVO"/>
+  		
   	</typeAliases>
   
   </configuration>

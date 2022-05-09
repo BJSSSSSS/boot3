@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.byeon.boot3.cart.CartMapper">
+    
+    	<insert id="setAdd" parameterType="CartVO">
+    		INSERT INTO CART(CARTNUM, ID, PRODUCTNUM, COUNT, REGDATE)
+    		VALUES(NULL, #{id}, #{productNum}, #{count}, now())
+    	</insert>
+    
+    	<select id="getList" resultType="CartVO" parameterType="CartVO">
+    		SELECT * FROM CART WHERE ID=#{id}
+    	</select>
+		
+    </mapper>

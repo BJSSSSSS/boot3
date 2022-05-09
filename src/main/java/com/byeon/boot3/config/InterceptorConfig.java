@@ -9,6 +9,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import com.byeon.boot3.interceptor.AdminInterceptor;
 import com.byeon.boot3.interceptor.BoardInterceptor;
 import com.byeon.boot3.interceptor.DeleteCheckInterceptor;
+import com.byeon.boot3.interceptor.LoginInterceptor;
 import com.byeon.boot3.interceptor.SellerInterceptor;
 import com.byeon.boot3.interceptor.WriterCheckInterceptor;
 
@@ -30,11 +31,19 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	@Autowired
 	private LocaleChangeInterceptor localeChangeInterceptor;
 	
+	@Autowired
+	private LoginInterceptor loginInterceptor;
+	
 	//@Autowired
 	//private DeleteCheckInterceptor deleteCheckInterceptor;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		
+		registry.addInterceptor(loginInterceptor)
+				.addPathPatterns("/product/detail");
+		
+		
 		//적용할 Interceptor를 registry에 등록
 		registry.addInterceptor(sellerInterceptor) //뒤에 ; 안찍고 이어짐 밑에까지
 		//Interceptor를 사용할 URL 주소
